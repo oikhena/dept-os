@@ -19,6 +19,7 @@ function MainLayout({ children }: { children: React.ReactNode }) {
   const handleSelect = (key: string) => router.push(`/dept/${key}`);
   const handleGenerate = () => router.push("/generate");
   const handleBuildCustom = () => router.push("/build");
+  const handleCompare = () => router.push("/compare");
 
   const handleDelete = async (id: string) => {
     const { createClient } = await import("../../lib/supabase/client");
@@ -48,6 +49,7 @@ function MainLayout({ children }: { children: React.ReactNode }) {
         onSelect={handleSelect}
         onGenerate={handleGenerate}
         onBuildCustom={handleBuildCustom}
+        onCompare={handleCompare}
         onDelete={handleDelete}
         advisors={advisors}
         activeTab={activeTab}

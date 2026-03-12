@@ -60,6 +60,7 @@ export interface Department {
   summary: string;
   region?: string;
   infrastructure?: "high-bandwidth" | "mobile-first" | "limited-connectivity" | "mixed";
+  coordinates?: { lat: number; lng: number };
   valueChain?: string[];
   roles: Role[];
   workflows: Workflow[];

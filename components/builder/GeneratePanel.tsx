@@ -5,6 +5,8 @@ import type { Department } from "../../types/department";
 import { TXT, SP, RAD, LS, LH } from "../../styles/tokens";
 import { AGENT_TYPES, EXAMPLE_QUERIES } from "../../data/constants";
 import { generateDepartment, tryParse } from "../../lib/ai/streaming";
+import PlacesAutocomplete from "../maps/PlacesAutocomplete";
+import type { PlaceDetails } from "../../lib/maps/loader";
 
 interface GeneratePanelProps {
   onGenerated: (dept: Department, query: string) => void;
@@ -12,6 +14,7 @@ interface GeneratePanelProps {
 
 export default function GeneratePanel({ onGenerated }: GeneratePanelProps) {
   const [query, setQuery] = useState("");
+  const [placeDetails, setPlaceDetails] = useState<PlaceDetails | null>(null);
   const [phase, setPhase] = useState<"idle" | "researching" | "error">("idle");
   const [rawStream, setRawStream] = useState("");
   const [partial, setPartial] = useState<Department | null>(null);
@@ -35,14 +38,20 @@ export default function GeneratePanel({ onGenerated }: GeneratePanelProps) {
     abortRef.current = new AbortController();
     let acc = "";
     try {
-      await generateDepartment(query, chunk => {
+      await generateDepartment(query, placeDetails, chunk => {
         acc += chunk; setRawStream(acc);
         const p = tryParse(acc);
         if (p?.label) setPartial(p);
       }, abortRef.current.signal);
       const final = tryParse(acc);
-      if (final?.label) { clearInterval(timerRef.current!); onGenerated(final, query); }
-      else { setParseError("Could not parse response. Try again."); setPhase("error"); }
+      if (final?.label) {
+        // Embed coordinates from place selection into the generated dept
+        if (placeDetails && final) {
+          final.coordinates = { lat: placeDetails.lat, lng: placeDetails.lng };
+        }
+        clearInterval(timerRef.current!);
+        onGenerated(final, query);
+      } else { setParseError("Could not parse response. Try again."); setPhase("error"); }
     } catch(err: any) {
       clearInterval(timerRef.current!);
       if (err.name !== "AbortError") { setParseError(err.message); setPhase("error"); }
@@ -61,9 +70,23 @@ export default function GeneratePanel({ onGenerated }: GeneratePanelProps) {
       <div style={{ width:300, flexShrink:0, display:"flex", flexDirection:"column", gap:SP.lg }}>
         <div>
           <div style={{ fontSize:TXT.sm, color:"#94a3b8", letterSpacing:LS.wide, marginBottom:SP.sm }}>RESEARCH ANY INSTITUTION</div>
-          <input value={query} onChange={e=>setQuery(e.target.value)} onKeyDown={e=>e.key==="Enter"&&generate()}
-            placeholder="e.g. 'Lagos State Ministry of Health'" disabled={phase==="researching"}
-            style={{ width:"100%", background:"#f8fafc", border:`1px solid ${phase==="researching"?"#22c55e60":"#e2e8f0"}`, color:"#1e293b", padding:`9px ${SP.md}px`, borderRadius:RAD.sm, fontSize:TXT.md, fontFamily:"inherit", outline:"none", boxSizing:"border-box", transition:"border-color 0.2s" }} />
+          <PlacesAutocomplete
+            value={query}
+            onChange={setQuery}
+            onPlaceSelect={details => {
+              setPlaceDetails(details);
+              if (details) setQuery(details.name);
+            }}
+            placeholder="e.g. 'Lagos State Ministry of Health'"
+            disabled={phase === "researching"}
+            style={{ border: `1px solid ${phase === "researching" ? "#22c55e60" : "#e2e8f0"}`, transition: "border-color 0.2s" }}
+          />
+          {placeDetails && (
+            <div style={{ fontSize: TXT.sm, color: "#22c55e", marginTop: 4, display: "flex", alignItems: "center", gap: 4 }}>
+              <span>📍</span>
+              <span style={{ color: "#64748b" }}>{placeDetails.address}</span>
+            </div>
+          )}
           <div style={{ display:"flex", gap:SP.sm, marginTop:SP.sm }}>
             {phase === "researching" ? (
               <button onClick={()=>{abortRef.current?.abort();clearInterval(timerRef.current!);setPhase("idle");}} style={{ flex:1, background:"#ef444418", border:"1px solid #ef4444", color:"#ef4444", padding:SP.sm, borderRadius:RAD.sm, cursor:"pointer", fontSize:TXT.md, fontFamily:"inherit" }}>✕ Cancel</button>
@@ -79,7 +102,7 @@ export default function GeneratePanel({ onGenerated }: GeneratePanelProps) {
             <div style={{ fontSize:TXT.sm, color:"#cbd5e1", marginBottom:SP.sm }}>TRY THESE</div>
             <div style={{ display:"flex", flexDirection:"column", gap:SP.xs }}>
               {EXAMPLE_QUERIES.map(q=>(
-                <button key={q} onClick={()=>setQuery(q)} style={{ background:"transparent", border:"1px solid #e2e8f0", color:"#94a3b8", padding:`${SP.xs}px ${SP.sm}px`, borderRadius:RAD.sm, cursor:"pointer", fontSize:TXT.sm, fontFamily:"inherit", textAlign:"left", transition:"all 0.1s" }}
+                <button key={q} onClick={()=>{ setQuery(q); setPlaceDetails(null); }} style={{ background:"transparent", border:"1px solid #e2e8f0", color:"#94a3b8", padding:`${SP.xs}px ${SP.sm}px`, borderRadius:RAD.sm, cursor:"pointer", fontSize:TXT.sm, fontFamily:"inherit", textAlign:"left", transition:"all 0.1s" }}
                   onMouseEnter={e=>{(e.target as HTMLElement).style.color="#64748b";(e.target as HTMLElement).style.borderColor="#cbd5e1";}}
                   onMouseLeave={e=>{(e.target as HTMLElement).style.color="#94a3b8";(e.target as HTMLElement).style.borderColor="#e2e8f0";}}>
                   {q}

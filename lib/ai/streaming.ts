@@ -1,11 +1,22 @@
 import { API_URL, SYSTEM_PROMPT } from "./prompts";
 import type { Department } from "../../types/department";
+import type { PlaceDetails } from "../maps/loader";
+
+function buildPlaceContext(place: PlaceDetails): string {
+  return `\n\nVERIFIED FACILITY DATA — use this to ground every claim:
+Name: ${place.name}
+Address: ${place.address}
+Coordinates: ${place.lat.toFixed(4)}, ${place.lng.toFixed(4)}
+Facility type: ${place.types.slice(0, 4).join(", ")}`;
+}
 
 export async function generateDepartment(
   query: string,
+  place: PlaceDetails | null,
   onChunk: (chunk: string) => void,
   signal: AbortSignal
 ): Promise<void> {
+  const placeContext = place ? buildPlaceContext(place) : "";
   const response = await fetch(API_URL, {
     method: "POST",
     signal,
@@ -17,7 +28,7 @@ export async function generateDepartment(
       system: SYSTEM_PROMPT,
       messages: [{
         role: "user",
-        content: `Research and generate the complete department schema for: "${query}"\n\nBe thorough. Ground every claim in real operational knowledge of this institution type. Weight agent recommendations based on the region's infrastructure constraints.`
+        content: `Research and generate the complete department schema for: "${query}"${placeContext}\n\nBe thorough. Ground every claim in real operational knowledge of this institution type. Weight agent recommendations based on the region's infrastructure constraints.`
       }]
     })
   });

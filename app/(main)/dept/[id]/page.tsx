@@ -8,8 +8,14 @@ import { VALUE_FLOW_COLORS, VALUE_FLOW_LABELS, SENSE_COLORS, SENSE_ICONS } from 
 import { DEPARTMENTS } from "../../../../data/templates";
 import { computeAdvisors } from "../../../../hooks/useAdvisors";
 import { useApp } from "../../../context/AppContext";
+import { createClient } from "../../../../lib/supabase/client";
+import { updateDepartment } from "../../../../lib/supabase/departments";
+import type { Department } from "../../../../types/department";
 import OperationalMap from "../../../../components/canvas/OperationalMap";
 import AgentsTab from "../../../../components/canvas/AgentsTab";
+import DeptMapTab from "../../../../components/canvas/DeptMapTab";
+import DeptChat from "../../../../components/chat/DeptChat";
+import ReportModal from "../../../../components/report/ReportModal";
 
 export default function DeptPage() {
   const params = useParams();
@@ -17,15 +23,19 @@ export default function DeptPage() {
   const router = useRouter();
   const id = params.id as string;
 
-  const { savedDepts, setAdvisors, activeTab, setActiveTab } = useApp();
+  const { savedDepts, setSavedDepts, setAdvisors, activeTab, setActiveTab } = useApp();
 
   const isBuiltIn = id in DEPARTMENTS;
-  const dept = isBuiltIn
+  const baseDept = isBuiltIn
     ? DEPARTMENTS[id]
     : savedDepts.find(s => s.id === id)?.department;
 
   const isSaved = !isBuiltIn;
   const savedEntry = isSaved ? savedDepts.find(s => s.id === id) : null;
+
+  // Local refinement override — persisted to Supabase for saved depts
+  const [refinedDept, setRefinedDept] = useState<Department | null>(null);
+  const dept = refinedDept ?? baseDept;
 
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
   const [selectedSense, setSelectedSense] = useState<string | null>(null);
@@ -38,6 +48,8 @@ export default function DeptPage() {
   const [splitPct, setSplitPct] = useState(55);
   const draggingRef = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [reportOpen, setReportOpen] = useState(false);
 
   // Sync activeTab from URL search param on mount / param change
   useEffect(() => {
@@ -47,12 +59,26 @@ export default function DeptPage() {
     if (filter) setSelectedValueFlow(filter);
   }, [searchParams, setActiveTab]);
 
-  // Reset selections on dept change
+  // Reset selections and refinement on dept change
   useEffect(() => {
     setSelectedNode(null);
     setSelectedSense(null);
     setSelectedValueFlow(null);
+    setRefinedDept(null);
   }, [id]);
+
+  const handleRefinement = useCallback(async (refined: Department) => {
+    setRefinedDept(refined);
+    if (isSaved && savedEntry) {
+      try {
+        const supabase = createClient();
+        await updateDepartment(supabase, savedEntry.id, refined);
+        setSavedDepts(prev => prev.map(s => s.id === savedEntry.id ? { ...s, department: refined } : s));
+      } catch (err) {
+        console.error("Failed to persist refinement:", err);
+      }
+    }
+  }, [isSaved, savedEntry, setSavedDepts]);
 
   // Pulse animation
   useEffect(() => {
@@ -102,11 +128,11 @@ export default function DeptPage() {
   const filteredSensors = selectedSense ? (dept.sensors || []).filter(s => s.sense === selectedSense) : (dept.sensors || []);
   const filteredWorkflows = selectedValueFlow ? (dept.workflows || []).filter(w => w.valueFlow === selectedValueFlow) : (dept.workflows || []);
 
-  const tabs = ["overview", "sensors", "knowledge", "value-flows", "ai-impact", "agents"];
-  const tabLabel = (t: string) => t === "agents" ? `Agents${dept.agents?.length ? ` (${dept.agents.length})` : ""}` : t.replace("-", " ");
+  const tabs = ["overview", "sensors", "knowledge", "value-flows", "ai-impact", "agents", "map"];
+  const tabLabel = (t: string) => t === "agents" ? `Agents${dept.agents?.length ? ` (${dept.agents.length})` : ""}` : t === "map" ? "🗺 Map" : t.replace("-", " ");
 
   return (
-    <div ref={containerRef} style={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0, height: "100vh", overflow: "hidden" }}>
+    <div style={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0, height: "100vh", overflow: "hidden" }}>
 
       {/* CONTEXTUAL HEADER */}
       <div style={{ background: DETAIL.bg, borderBottom: `1px solid ${CLR.borderDefault}`, padding: "0 20px", display: "flex", alignItems: "center", height: 52, flexShrink: 0 }}>
@@ -125,7 +151,7 @@ export default function DeptPage() {
             )}
           </div>
         </div>
-        <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
+        <div style={{ display: "flex", gap: 6, flexShrink: 0, alignItems: "center" }}>
           {[
             { v: dept.roles?.length, l: "roles", c: accentColor },
             { v: dept.workflows?.length, l: "flows", c: "#60a5fa" },
@@ -138,8 +164,22 @@ export default function DeptPage() {
               <div style={{ fontSize: 9, color: CLR.textMuted, fontFamily: FONT.sans, letterSpacing: LS.wide }}>{s.l.toUpperCase()}</div>
             </div>
           ))}
+          <button
+            onClick={() => setReportOpen(true)}
+            style={{ marginLeft: 8, background: "transparent", border: `1px solid ${CLR.borderDefault}`, color: CLR.textSecondary, borderRadius: 6, padding: "5px 12px", cursor: "pointer", fontSize: 11, fontFamily: FONT.sans, fontWeight: 600, transition: "all 0.15s" }}>
+            ↓ Report
+          </button>
+          <button
+            onClick={() => setChatOpen(o => !o)}
+            style={{ background: chatOpen ? accentColor : "transparent", border: `1px solid ${chatOpen ? accentColor : CLR.borderDefault}`, color: chatOpen ? "#ffffff" : CLR.textSecondary, borderRadius: 6, padding: "5px 12px", cursor: "pointer", fontSize: 11, fontFamily: FONT.sans, fontWeight: 600, transition: "all 0.15s", display: "flex", alignItems: "center", gap: 5 }}>
+            💬 Chat
+          </button>
         </div>
       </div>
+
+      {/* BODY ROW: main content + optional chat panel */}
+      <div style={{ flex: 1, display: "flex", flexDirection: "row", minHeight: 0 }}>
+      <div ref={containerRef} style={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0, overflow: "hidden" }}>
 
       {/* OPERATIONAL MAP */}
       <div style={{ height: `${splitPct}%`, flexShrink: 0, position: "relative" }}>
@@ -158,6 +198,7 @@ export default function DeptPage() {
             setHoveredWorkflow={setHoveredWorkflow}
             pulsePhase={pulsePhase}
             accentColor={accentColor}
+            onRolesUpdate={roles => handleRefinement({ ...dept, roles })}
           />
         )}
       </div>
@@ -416,7 +457,27 @@ export default function DeptPage() {
           </div>
         )}
 
+        {/* MAP */}
+        {activeTab === "map" && (
+          <div style={{ height: "100%", minHeight: 0 }}>
+            <DeptMapTab dept={dept} accentColor={accentColor} />
+          </div>
+        )}
+
       </div>
+
+      </div>{/* end main content column */}
+
+      {/* CHAT PANEL */}
+      {chatOpen && dept && (
+        <DeptChat dept={dept} accentColor={accentColor} savedDeptId={savedEntry?.id} onClose={() => setChatOpen(false)} onRefinement={handleRefinement} />
+      )}
+
+      </div>{/* end body row */}
+
+      {reportOpen && dept && (
+        <ReportModal dept={dept} onClose={() => setReportOpen(false)} />
+      )}
     </div>
   );
 }

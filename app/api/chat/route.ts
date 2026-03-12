@@ -9,10 +9,24 @@ export async function POST(req: Request) {
     );
   }
 
-  // Optional auth check — allow unauthenticated for graceful degradation
+  // Require authentication
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  // user is available for future usage tracking (Phase 2)
+  if (!user) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  // Rate limit: 20 requests per 60 seconds per user
+  const { data: allowed, error: rlError } = await supabase.rpc(
+    "check_chat_rate_limit",
+    { p_user_id: user.id, p_max: 20, p_window_secs: 60 }
+  );
+  if (rlError || !allowed) {
+    return Response.json(
+      { error: "Rate limit exceeded. Try again in a minute." },
+      { status: 429, headers: { "Retry-After": "60" } }
+    );
+  }
 
   const body = await req.json();
 

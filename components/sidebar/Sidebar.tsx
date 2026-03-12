@@ -13,6 +13,7 @@ interface SidebarProps {
   onSelect: (key: string) => void;
   onGenerate: () => void;
   onBuildCustom: () => void;
+  onCompare: () => void;
   onDelete: (id: string) => void;
   advisors: Advisor[];
   activeTab: string;
@@ -21,7 +22,7 @@ interface SidebarProps {
   onLogout: () => void;
 }
 
-export default function Sidebar({ departments, savedDepts, selectedDept, onSelect, onGenerate, onBuildCustom, onDelete, advisors, activeTab, onAdvisorClick, user, onLogout }: SidebarProps) {
+export default function Sidebar({ departments, savedDepts, selectedDept, onSelect, onGenerate, onBuildCustom, onCompare, onDelete, advisors, activeTab, onAdvisorClick, user, onLogout }: SidebarProps) {
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({ builtin: false, saved: false });
   const toggle = (key: string) => setCollapsed(c => ({ ...c, [key]: !c[key] }));
 
@@ -129,6 +130,12 @@ export default function Sidebar({ departments, savedDepts, selectedDept, onSelec
           onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = SIDEBAR.hoverBg; }}
           onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}>
           ✦ Build Custom...
+        </button>
+        <button onClick={onCompare}
+          style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:6, width:"100%", background:"transparent", border:`1px solid ${SIDEBAR.border}`, color:CLR.textSecondary, padding:"7px", borderRadius:RAD.md, cursor:"pointer", fontFamily:FONT.sans, fontSize:11, fontWeight:500, letterSpacing:LS.normal, transition:"all 0.12s" }}
+          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = SIDEBAR.hoverBg; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}>
+          ⇄ Compare...
         </button>
       </div>
 

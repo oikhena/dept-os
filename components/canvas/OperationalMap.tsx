@@ -1,5 +1,6 @@
 "use client";
-import type { Department } from "../../types/department";
+import { useState, useEffect, useRef, useCallback } from "react";
+import type { Department, Role } from "../../types/department";
 import { MAP, FONT, CLR } from "../../styles/tokens";
 import { VALUE_FLOW_COLORS, VALUE_FLOW_LABELS, SENSE_COLORS } from "../../data/constants";
 
@@ -13,10 +14,129 @@ interface OperationalMapProps {
   setHoveredWorkflow: (id: string | null) => void;
   pulsePhase: number;
   accentColor: string;
+  onRolesUpdate?: (roles: Role[]) => void;
 }
 
-export default function OperationalMap({ dept, activeTab, selectedNode, setSelectedNode, selectedValueFlow, hoveredWorkflow, setHoveredWorkflow, pulsePhase, accentColor }: OperationalMapProps) {
-  const getRoleById = (id: string) => dept.roles?.find(r => r.id === id);
+interface Camera { zoom: number; panX: number; panY: number; }
+const RESET_CAMERA: Camera = { zoom: 1, panX: 0, panY: 0 };
+
+export default function OperationalMap({
+  dept, activeTab, selectedNode, setSelectedNode, selectedValueFlow,
+  hoveredWorkflow, setHoveredWorkflow, pulsePhase, accentColor, onRolesUpdate,
+}: OperationalMapProps) {
+
+  const svgRef = useRef<SVGSVGElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Camera state
+  const [camera, setCamera] = useState<Camera>(RESET_CAMERA);
+  const cameraRef = useRef(camera);
+  useEffect(() => { cameraRef.current = camera; }, [camera]);
+
+  // Local role positions (overrides dept.roles positions via drag)
+  const [localRoles, setLocalRoles] = useState<Role[]>(dept.roles || []);
+  useEffect(() => {
+    setLocalRoles(dept.roles || []);
+    setCamera(RESET_CAMERA);
+  }, [dept]);
+
+  // Drag node state
+  const dragRef = useRef<{ id: string; nodeX: number; nodeY: number; mouseX: number; mouseY: number; moved: boolean } | null>(null);
+
+  // Pan state
+  const panRef = useRef<{ startPanX: number; startPanY: number; mouseX: number; mouseY: number } | null>(null);
+
+  // Inline label editing
+  const [editingNodeId, setEditingNodeId] = useState<string | null>(null);
+  const [editLabel, setEditLabel] = useState("");
+
+  // Convert client coords → SVG viewBox coords
+  const toSvgCoords = useCallback((clientX: number, clientY: number) => {
+    const svg = svgRef.current;
+    if (!svg) return { x: 0, y: 0 };
+    const pt = svg.createSVGPoint();
+    pt.x = clientX;
+    pt.y = clientY;
+    const m = svg.getScreenCTM();
+    if (!m) return { x: 0, y: 0 };
+    return pt.matrixTransform(m.inverse());
+  }, []);
+
+  // Convert SVG viewBox coords → world (content) coords
+  const toWorldCoords = useCallback((svgX: number, svgY: number, cam: Camera) => ({
+    x: (svgX - cam.panX) / cam.zoom,
+    y: (svgY - cam.panY) / cam.zoom,
+  }), []);
+
+  // Wheel zoom (non-passive so we can preventDefault)
+  useEffect(() => {
+    const el = svgRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      const svgPt = toSvgCoords(e.clientX, e.clientY);
+      const factor = e.deltaY < 0 ? 1.12 : 1 / 1.12;
+      setCamera(cam => {
+        const newZoom = Math.max(0.4, Math.min(5, cam.zoom * factor));
+        return {
+          zoom: newZoom,
+          panX: svgPt.x - (svgPt.x - cam.panX) * (newZoom / cam.zoom),
+          panY: svgPt.y - (svgPt.y - cam.panY) * (newZoom / cam.zoom),
+        };
+      });
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, [toSvgCoords]);
+
+  // Global mouseup / mousemove (for drag and pan outside SVG)
+  useEffect(() => {
+    const onMouseMove = (e: MouseEvent) => {
+      const cam = cameraRef.current;
+      const svgPt = toSvgCoords(e.clientX, e.clientY);
+
+      if (panRef.current) {
+        const { startPanX, startPanY, mouseX, mouseY } = panRef.current;
+        const dx = svgPt.x - mouseX;
+        const dy = svgPt.y - mouseY;
+        setCamera(c => ({ ...c, panX: startPanX + dx, panY: startPanY + dy }));
+      }
+
+      if (dragRef.current) {
+        const { id, nodeX, nodeY, mouseX, mouseY } = dragRef.current;
+        const world = toWorldCoords(svgPt.x, svgPt.y, cam);
+        const dx = world.x - mouseX;
+        const dy = world.y - mouseY;
+        if (Math.abs(dx) > 0.3 || Math.abs(dy) > 0.3) dragRef.current.moved = true;
+        setLocalRoles(roles => roles.map(r => r.id === id ? {
+          ...r,
+          x: Math.max(8, Math.min(92, nodeX + dx)),
+          y: Math.max(8, Math.min(88, nodeY + dy)),
+        } : r));
+      }
+    };
+
+    const onMouseUp = () => {
+      if (dragRef.current?.moved) {
+        // Persist final positions
+        setLocalRoles(roles => {
+          onRolesUpdate?.(roles);
+          return roles;
+        });
+      }
+      dragRef.current = null;
+      panRef.current = null;
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+    };
+  }, [toSvgCoords, toWorldCoords, onRolesUpdate]);
+
+  const getRoleById = (id: string) => localRoles.find(r => r.id === id);
 
   const getWorkflowPath = (wf: { from: string; to: string }) => {
     const f = getRoleById(wf.from), t = getRoleById(wf.to);
@@ -26,28 +146,22 @@ export default function OperationalMap({ dept, activeTab, selectedNode, setSelec
     return `M ${f.x} ${f.y} Q ${mx} ${my} ${t.x} ${t.y}`;
   };
 
-  // Overlay: compute role opacity/scale per tab
   const hasSensors = (roleId: string) => (dept.sensors || []).some(s => s.role === roleId);
   const roleEffort = (roleId: string) => (dept.knowledgeWork || []).filter(k => k.role === roleId).reduce((s, k) => s + (k.effort || 0), 0);
-  const maxEffort = Math.max(1, ...(dept.roles || []).map(r => roleEffort(r.id)));
+  const maxEffort = Math.max(1, ...(localRoles).map(r => roleEffort(r.id)));
 
-  const roleOpacity = (role: { id: string }) => {
+  const roleOpacity = (role: Role) => {
     if (activeTab === "sensors") return hasSensors(role.id) ? 1 : 0.25;
     if (activeTab === "value-flows" && selectedValueFlow) {
-      const connected = (dept.workflows || []).some(w => w.valueFlow === selectedValueFlow && (w.from === role.id || w.to === role.id));
-      return connected ? 1 : 0.2;
+      return (dept.workflows || []).some(w => w.valueFlow === selectedValueFlow && (w.from === role.id || w.to === role.id)) ? 1 : 0.2;
     }
     if (selectedNode && selectedNode !== role.id) {
-      const connected = (dept.workflows || []).some(w => (w.from === selectedNode && w.to === role.id) || (w.to === selectedNode && w.from === role.id));
-      return connected ? 0.8 : 0.2;
+      return (dept.workflows || []).some(w => (w.from === selectedNode && w.to === role.id) || (w.to === selectedNode && w.from === role.id)) ? 0.8 : 0.2;
     }
     return 1;
   };
 
-  const roleScale = (role: { id: string }) => {
-    if (activeTab === "knowledge") return 0.7 + 0.6 * (roleEffort(role.id) / maxEffort);
-    return 1;
-  };
+  const roleScale = (role: Role) => activeTab === "knowledge" ? 0.7 + 0.6 * (roleEffort(role.id) / maxEffort) : 1;
 
   const edgeOpacity = (wf: { from: string; to: string; valueFlow: string }) => {
     if (activeTab === "value-flows" && selectedValueFlow) return wf.valueFlow === selectedValueFlow ? 1 : 0.06;
@@ -56,21 +170,95 @@ export default function OperationalMap({ dept, activeTab, selectedNode, setSelec
     return 1;
   };
 
-  // Sensor overlay dots
   const senseColorMap: Record<string, string> = { sight:"#60a5fa", sound:"#a78bfa", smell:"#34d399", touch:"#fb923c", taste:"#f472b6" };
   const roleSensors = (roleId: string) => (dept.sensors || []).filter(s => s.role === roleId);
-
   const nodeSize = 6.5;
 
+  // Commit label edit
+  const commitEdit = (nodeId: string, label: string) => {
+    const trimmed = label.trim();
+    if (trimmed) {
+      setLocalRoles(roles => {
+        const updated = roles.map(r => r.id === nodeId ? { ...r, label: trimmed } : r);
+        onRolesUpdate?.(updated);
+        return updated;
+      });
+    }
+    setEditingNodeId(null);
+  };
+
+  // Export SVG
+  const exportSvg = () => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    // Clone and reset transform for clean export
+    const clone = svg.cloneNode(true) as SVGSVGElement;
+    const str = new XMLSerializer().serializeToString(clone);
+    const blob = new Blob([str], { type: "image/svg+xml" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${dept.label.replace(/\s+/g, "-")}-map.svg`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  // Export PNG (4× resolution)
+  const exportPng = () => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    const str = new XMLSerializer().serializeToString(svg);
+    const scale = 4;
+    const { width, height } = svg.getBoundingClientRect();
+    const canvas = document.createElement("canvas");
+    canvas.width = width * scale;
+    canvas.height = height * scale;
+    const ctx = canvas.getContext("2d")!;
+    ctx.fillStyle = MAP.bg;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const img = new Image();
+    const blob = new Blob([str], { type: "image/svg+xml" });
+    const url = URL.createObjectURL(blob);
+    img.onload = () => {
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(url);
+      const a = document.createElement("a");
+      a.href = canvas.toDataURL("image/png");
+      a.download = `${dept.label.replace(/\s+/g, "-")}-map.png`;
+      a.click();
+    };
+    img.src = url;
+  };
+
+  const isDragging = () => !!dragRef.current || !!panRef.current;
+  const zoomPct = Math.round(camera.zoom * 100);
+
   return (
-    <div style={{ width:"100%", height:"100%", background:MAP.bg, position:"relative", overflow:"hidden" }}>
-      <svg viewBox="0 0 100 92" preserveAspectRatio="xMidYMid meet" style={{ width:"100%", height:"100%", display:"block" }}>
+    <div ref={containerRef} style={{ width:"100%", height:"100%", background:MAP.bg, position:"relative", overflow:"hidden" }}>
+      <svg
+        ref={svgRef}
+        viewBox="0 0 100 92"
+        preserveAspectRatio="xMidYMid meet"
+        style={{ width:"100%", height:"100%", display:"block", cursor: panRef.current ? "grabbing" : dragRef.current ? "grabbing" : "default" }}
+        onMouseDown={e => {
+          // Pan on background click (not on nodes/edges)
+          const tag = (e.target as Element).tagName;
+          if (tag === "svg" || tag === "rect" && (e.target as Element).getAttribute("fill") === "url(#dotgrid)") {
+            const svgPt = toSvgCoords(e.clientX, e.clientY);
+            panRef.current = { startPanX: cameraRef.current.panX, startPanY: cameraRef.current.panY, mouseX: svgPt.x, mouseY: svgPt.y };
+          }
+        }}
+        onDoubleClick={e => {
+          const tag = (e.target as Element).tagName;
+          if (tag === "svg" || (tag === "rect" && (e.target as Element).getAttribute("fill") === "url(#dotgrid)")) {
+            setCamera(RESET_CAMERA);
+          }
+        }}
+      >
         <defs>
-          {/* Dot grid pattern */}
           <pattern id="dotgrid" width="5" height="5" patternUnits="userSpaceOnUse">
             <circle cx="2.5" cy="2.5" r="0.25" fill={MAP.grid} />
           </pattern>
-          {/* Arrow markers */}
           {Object.entries(VALUE_FLOW_COLORS).map(([k, c]) => (
             <marker key={k} id={`arr-${k}`} markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
               <path d="M0,0 L0,5 L5,2.5 z" fill={c} />
@@ -79,7 +267,6 @@ export default function OperationalMap({ dept, activeTab, selectedNode, setSelec
           <marker id="arr-dim" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
             <path d="M0,0 L0,5 L5,2.5 z" fill="#475569" />
           </marker>
-          {/* Drop shadow for nodes */}
           <filter id="nodeShadow" x="-30%" y="-30%" width="160%" height="160%">
             <feDropShadow dx="0" dy="1" stdDeviation="1.5" floodColor="#000000" floodOpacity="0.4" />
           </filter>
@@ -88,119 +275,178 @@ export default function OperationalMap({ dept, activeTab, selectedNode, setSelec
           </filter>
         </defs>
 
-        {/* Background grid */}
+        {/* Fixed background */}
         <rect width="100" height="92" fill="url(#dotgrid)" />
-
-        {/* Subtle center glow */}
         <radialGradient id="centerGlow" cx="50%" cy="45%" r="45%">
           <stop offset="0%" stopColor={accentColor} stopOpacity="0.06" />
           <stop offset="100%" stopColor={accentColor} stopOpacity="0" />
         </radialGradient>
         <rect width="100" height="92" fill="url(#centerGlow)" />
 
-        {/* Workflow edges */}
-        {(dept.workflows || []).map((wf, idx) => {
-          const isActive = hoveredWorkflow === wf.id || (selectedNode && (wf.from === selectedNode || wf.to === selectedNode));
-          const vfc = VALUE_FLOW_COLORS[wf.valueFlow] || "#475569";
-          const opacity = edgeOpacity(wf);
-          const pid = `wfp-${wf.id}`;
-          const dur = 2.2 + (idx % 4) * 0.35;
-          const pCount = isActive ? 4 : 2;
-          const f = getRoleById(wf.from), t = getRoleById(wf.to);
-          if (!f || !t) return null;
-          const mx = (f.x + t.x) / 2, my = (f.y + t.y) / 2 - 8;
-          return (
-            <g key={wf.id} style={{ opacity, transition:"opacity 0.4s" }}>
-              {/* Hit area */}
-              <path d={getWorkflowPath(wf)} fill="none" stroke="transparent" strokeWidth={4} style={{ cursor:"pointer" }}
-                onMouseEnter={() => setHoveredWorkflow(wf.id)} onMouseLeave={() => setHoveredWorkflow(null)} />
-              {/* Visible path */}
-              <path id={pid} d={getWorkflowPath(wf)} fill="none"
-                stroke={isActive ? vfc + "bb" : vfc + "55"} strokeWidth={isActive ? 0.7 : 0.35}
-                strokeDasharray={wf.valueFlow === "costSink" ? "2,1.5" : wf.valueFlow === "valueLeak" ? "1,1.5" : "none"}
-                markerEnd={isActive ? `url(#arr-${wf.valueFlow})` : "url(#arr-dim)"}
-                style={{ transition:"stroke 0.2s, stroke-width 0.2s" }} pointerEvents="none" />
-              {/* Animated particles */}
-              {Array.from({ length: pCount }).map((_, i) => (
-                <circle key={i} r={isActive && i === 0 ? 1 : 0.6} fill={vfc}
-                  opacity={isActive ? (i === 0 ? 0.95 : 0.5) : 0.35} pointerEvents="none"
-                  style={{ filter: isActive && i === 0 ? `drop-shadow(0 0 2px ${vfc})` : "none" }}>
-                  <animateMotion dur={`${(dur * (0.9 + i * 0.07)).toFixed(2)}s`} repeatCount="indefinite" begin={`${-(i / pCount * dur).toFixed(2)}s`}>
-                    <mpath href={`#${pid}`} />
-                  </animateMotion>
-                </circle>
-              ))}
-              {/* Hover tooltip */}
-              {hoveredWorkflow === wf.id && f.id !== t.id && (
-                <g>
-                  <rect x={mx - 16} y={my - 7} width={32} height={7} rx={2} fill={MAP.labelBg} stroke={vfc} strokeWidth={0.2} strokeOpacity={0.5} />
-                  <text x={mx} y={my - 2} textAnchor="middle" fill={CLR.textOnDarkBright} fontSize="2.6" fontFamily={FONT.mono}>{wf.label}</text>
-                </g>
-              )}
-            </g>
-          );
-        })}
+        {/* Camera group — all content is panned/zoomed here */}
+        <g transform={`translate(${camera.panX} ${camera.panY}) scale(${camera.zoom})`}>
 
-        {/* Role nodes */}
-        {(dept.roles || []).map(role => {
-          const isSel = selectedNode === role.id;
-          const scale = roleScale(role);
-          const opacity = roleOpacity(role);
-          const s = nodeSize * scale;
-          const senses = roleSensors(role.id);
-
-          return (
-            <g key={role.id} onClick={() => setSelectedNode(isSel ? null : role.id)} style={{ cursor:"pointer", opacity, transition:"opacity 0.4s" }}>
-              {/* Rounded square node */}
-              <rect x={role.x - s} y={role.y - s} width={s * 2} height={s * 2} rx={MAP.nodeRadius * scale * 0.15}
-                fill={isSel ? accentColor + "30" : MAP.nodeBg}
-                stroke={isSel ? accentColor : MAP.nodeBorder}
-                strokeWidth={isSel ? 0.7 : 0.4}
-                filter={isSel ? "url(#nodeGlow)" : "url(#nodeShadow)"}
-                style={{ transition:"all 0.3s" }} />
-              {/* Emoji */}
-              <text x={role.x} y={role.y + 1.5} textAnchor="middle" fontSize={5.5 * scale} style={{ userSelect:"none", pointerEvents:"none" }}>{role.icon}</text>
-              {/* Label chip */}
-              <rect x={role.x - 12} y={role.y + s + 1.5} width={24} height={5} rx={1.5} fill={MAP.labelBg} />
-              <text x={role.x} y={role.y + s + 5} textAnchor="middle" fill={isSel ? accentColor : CLR.textOnDark} fontSize="2.6" fontFamily={FONT.mono}
-                style={{ pointerEvents:"none", letterSpacing:"0.03em" }}>{role.label.length > 18 ? role.label.slice(0, 17) + "\u2026" : role.label}</text>
-
-              {/* Sensor overlay dots (visible on sensors tab or when selected) */}
-              {(activeTab === "sensors" || isSel) && senses.map((s, si) => {
-                const angle = (si / Math.max(1, senses.length)) * Math.PI * 2 - Math.PI / 2;
-                const orbitR = s ? nodeSize * scale + 3 : 0;
-                const sx = role.x + Math.cos(angle + pulsePhase * 0.02) * orbitR;
-                const sy = role.y + Math.sin(angle + pulsePhase * 0.02) * orbitR;
-                return (
-                  <circle key={s.id} cx={sx} cy={sy} r={1.2}
-                    fill={senseColorMap[s.sense] || "#94a3b8"}
-                    opacity={0.7 + 0.3 * Math.sin(pulsePhase * 0.06 + si)}
-                    style={{ transition:"cx 0.1s, cy 0.1s" }}>
-                    <title>{s.sense}: {s.label}</title>
+          {/* Workflow edges */}
+          {(dept.workflows || []).map((wf, idx) => {
+            const isActive = hoveredWorkflow === wf.id || !!(selectedNode && (wf.from === selectedNode || wf.to === selectedNode));
+            const vfc = VALUE_FLOW_COLORS[wf.valueFlow] || "#475569";
+            const opacity = edgeOpacity(wf);
+            const pid = `wfp-${wf.id}`;
+            const dur = 2.2 + (idx % 4) * 0.35;
+            const pCount = isActive ? 4 : 2;
+            const f = getRoleById(wf.from), t = getRoleById(wf.to);
+            if (!f || !t) return null;
+            const mx = (f.x + t.x) / 2, my = (f.y + t.y) / 2 - 8;
+            return (
+              <g key={wf.id} style={{ opacity, transition:"opacity 0.4s" }}>
+                <path d={getWorkflowPath(wf)} fill="none" stroke="transparent" strokeWidth={4} style={{ cursor:"pointer" }}
+                  onMouseEnter={() => setHoveredWorkflow(wf.id)} onMouseLeave={() => setHoveredWorkflow(null)} />
+                <path id={pid} d={getWorkflowPath(wf)} fill="none"
+                  stroke={isActive ? vfc + "bb" : vfc + "55"} strokeWidth={isActive ? 0.7 : 0.35}
+                  strokeDasharray={wf.valueFlow === "costSink" ? "2,1.5" : wf.valueFlow === "valueLeak" ? "1,1.5" : "none"}
+                  markerEnd={isActive ? `url(#arr-${wf.valueFlow})` : "url(#arr-dim)"}
+                  style={{ transition:"stroke 0.2s, stroke-width 0.2s" }} pointerEvents="none" />
+                {Array.from({ length: pCount }).map((_, i) => (
+                  <circle key={i} r={isActive && i === 0 ? 1 : 0.6} fill={vfc}
+                    opacity={isActive ? (i === 0 ? 0.95 : 0.5) : 0.35} pointerEvents="none"
+                    style={{ filter: isActive && i === 0 ? `drop-shadow(0 0 2px ${vfc})` : "none" }}>
+                    <animateMotion dur={`${(dur * (0.9 + i * 0.07)).toFixed(2)}s`} repeatCount="indefinite" begin={`${-(i / pCount * dur).toFixed(2)}s`}>
+                      <mpath href={`#${pid}`} />
+                    </animateMotion>
                   </circle>
-                );
-              })}
-
-              {/* AI impact overlay (visible on ai-impact tab) */}
-              {activeTab === "ai-impact" && (() => {
-                const tasks = (dept.knowledgeWork || []).filter(k => k.role === role.id);
-                const scCount = tasks.filter(k => k.aiImpact === "shortcircuit").length;
-                const suCount = tasks.filter(k => k.aiImpact === "supercharge").length;
-                if (!scCount && !suCount) return null;
-                return (
+                ))}
+                {hoveredWorkflow === wf.id && f.id !== t.id && (
                   <g>
-                    {scCount > 0 && <text x={role.x + s + 1} y={role.y - 1} fontSize="3.5" style={{ pointerEvents:"none" }}>🔁</text>}
-                    {suCount > 0 && <text x={role.x + s + 1} y={role.y + 3} fontSize="3.5" style={{ pointerEvents:"none" }}>⚡</text>}
+                    <rect x={mx - 16} y={my - 7} width={32} height={7} rx={2} fill={MAP.labelBg} stroke={vfc} strokeWidth={0.2} strokeOpacity={0.5} />
+                    <text x={mx} y={my - 2} textAnchor="middle" fill={CLR.textOnDarkBright} fontSize="2.6" fontFamily={FONT.mono}>{wf.label}</text>
                   </g>
-                );
-              })()}
-            </g>
-          );
-        })}
+                )}
+              </g>
+            );
+          })}
+
+          {/* Role nodes */}
+          {localRoles.map(role => {
+            const isSel = selectedNode === role.id;
+            const isDraggingThis = dragRef.current?.id === role.id;
+            const scale = roleScale(role);
+            const opacity = roleOpacity(role);
+            const s = nodeSize * scale;
+            const senses = roleSensors(role.id);
+            const isEditing = editingNodeId === role.id;
+
+            return (
+              <g key={role.id}
+                style={{ opacity, transition: isDraggingThis ? "none" : "opacity 0.4s", cursor: isDraggingThis ? "grabbing" : "grab" }}
+                onClick={e => {
+                  if (dragRef.current?.moved) return; // suppress click after drag
+                  setSelectedNode(isSel ? null : role.id);
+                }}
+                onMouseDown={e => {
+                  e.stopPropagation();
+                  const svgPt = toSvgCoords(e.clientX, e.clientY);
+                  const world = toWorldCoords(svgPt.x, svgPt.y, cameraRef.current);
+                  dragRef.current = { id: role.id, nodeX: role.x, nodeY: role.y, mouseX: world.x, mouseY: world.y, moved: false };
+                }}
+                onDoubleClick={e => {
+                  e.stopPropagation();
+                  setEditingNodeId(role.id);
+                  setEditLabel(role.label);
+                }}
+              >
+                <rect x={role.x - s} y={role.y - s} width={s * 2} height={s * 2} rx={MAP.nodeRadius * scale * 0.15}
+                  fill={isSel ? accentColor + "30" : isDraggingThis ? MAP.nodeBg + "cc" : MAP.nodeBg}
+                  stroke={isSel ? accentColor : isDraggingThis ? accentColor + "88" : MAP.nodeBorder}
+                  strokeWidth={isSel || isDraggingThis ? 0.7 : 0.4}
+                  filter={isSel ? "url(#nodeGlow)" : "url(#nodeShadow)"}
+                  style={{ transition: isDraggingThis ? "none" : "all 0.3s" }} />
+                <text x={role.x} y={role.y + 1.5} textAnchor="middle" fontSize={5.5 * scale} style={{ userSelect:"none", pointerEvents:"none" }}>{role.icon}</text>
+                <rect x={role.x - 12} y={role.y + s + 1.5} width={24} height={5} rx={1.5} fill={MAP.labelBg} />
+                {isEditing ? (
+                  <foreignObject x={role.x - 13} y={role.y + s + 1} width={26} height={7}>
+                    <input
+                      value={editLabel}
+                      onChange={e => setEditLabel(e.target.value)}
+                      onKeyDown={e => {
+                        e.stopPropagation();
+                        if (e.key === "Enter") commitEdit(role.id, editLabel);
+                        if (e.key === "Escape") setEditingNodeId(null);
+                      }}
+                      onBlur={() => commitEdit(role.id, editLabel)}
+                      autoFocus
+                      style={{ width: "100%", height: "100%", fontSize: "4px", fontFamily: "'IBM Plex Mono',monospace", background: "#1e2235", border: `1px solid ${accentColor}`, borderRadius: "2px", textAlign: "center", padding: "1px 2px", color: "#e5e7eb", outline: "none", boxSizing: "border-box" }}
+                    />
+                  </foreignObject>
+                ) : (
+                  <text x={role.x} y={role.y + s + 5} textAnchor="middle" fill={isSel ? accentColor : CLR.textOnDark} fontSize="2.6" fontFamily={FONT.mono}
+                    style={{ pointerEvents:"none", letterSpacing:"0.03em" }}>
+                    {role.label.length > 18 ? role.label.slice(0, 17) + "\u2026" : role.label}
+                  </text>
+                )}
+
+                {(activeTab === "sensors" || isSel) && senses.map((sens, si) => {
+                  const angle = (si / Math.max(1, senses.length)) * Math.PI * 2 - Math.PI / 2;
+                  const orbitR = nodeSize * scale + 3;
+                  const sx = role.x + Math.cos(angle + pulsePhase * 0.02) * orbitR;
+                  const sy = role.y + Math.sin(angle + pulsePhase * 0.02) * orbitR;
+                  return (
+                    <circle key={sens.id} cx={sx} cy={sy} r={1.2}
+                      fill={senseColorMap[sens.sense] || "#94a3b8"}
+                      opacity={0.7 + 0.3 * Math.sin(pulsePhase * 0.06 + si)}
+                      style={{ transition:"cx 0.1s, cy 0.1s" }} pointerEvents="none">
+                      <title>{sens.sense}: {sens.label}</title>
+                    </circle>
+                  );
+                })}
+
+                {activeTab === "ai-impact" && (() => {
+                  const tasks = (dept.knowledgeWork || []).filter(k => k.role === role.id);
+                  const scCount = tasks.filter(k => k.aiImpact === "shortcircuit").length;
+                  const suCount = tasks.filter(k => k.aiImpact === "supercharge").length;
+                  if (!scCount && !suCount) return null;
+                  return (
+                    <g>
+                      {scCount > 0 && <text x={role.x + s + 1} y={role.y - 1} fontSize="3.5" style={{ pointerEvents:"none" }}>🔁</text>}
+                      {suCount > 0 && <text x={role.x + s + 1} y={role.y + 3} fontSize="3.5" style={{ pointerEvents:"none" }}>⚡</text>}
+                    </g>
+                  );
+                })()}
+              </g>
+            );
+          })}
+        </g>
       </svg>
 
-      {/* Value flow legend (bottom of map) */}
-      <div style={{ position:"absolute", bottom:8, left:12, right:12, display:"flex", gap:12, flexWrap:"wrap" }}>
+      {/* Toolbar overlay */}
+      <div style={{ position:"absolute", top:8, right:8, display:"flex", gap:4, zIndex:10 }}>
+        {camera.zoom !== 1 && (
+          <div style={{ background:"rgba(0,0,0,0.5)", color:CLR.textOnDark, borderRadius:3, padding:"3px 7px", fontSize:9, fontFamily:FONT.mono, display:"flex", alignItems:"center" }}>
+            {zoomPct}%
+          </div>
+        )}
+        <button onClick={() => setCamera(RESET_CAMERA)} title="Reset view (double-click background)"
+          style={{ background:"rgba(0,0,0,0.5)", border:"1px solid rgba(255,255,255,0.1)", color:CLR.textOnDark, borderRadius:3, padding:"3px 8px", cursor:"pointer", fontSize:10, fontFamily:FONT.mono }}>
+          ⊡
+        </button>
+        <button onClick={exportSvg} title="Export as SVG"
+          style={{ background:"rgba(0,0,0,0.5)", border:"1px solid rgba(255,255,255,0.1)", color:CLR.textOnDark, borderRadius:3, padding:"3px 8px", cursor:"pointer", fontSize:10, fontFamily:FONT.mono }}>
+          SVG
+        </button>
+        <button onClick={exportPng} title="Export as PNG (4×)"
+          style={{ background:"rgba(0,0,0,0.5)", border:"1px solid rgba(255,255,255,0.1)", color:CLR.textOnDark, borderRadius:3, padding:"3px 8px", cursor:"pointer", fontSize:10, fontFamily:FONT.mono }}>
+          PNG
+        </button>
+      </div>
+
+      {/* Hint when zoom is default */}
+      {camera.zoom === 1 && camera.panX === 0 && camera.panY === 0 && (
+        <div style={{ position:"absolute", bottom:28, right:8, fontSize:8, color:"rgba(255,255,255,0.2)", fontFamily:FONT.mono, pointerEvents:"none" }}>
+          scroll to zoom · drag to pan · drag nodes · dbl-click label to edit
+        </div>
+      )}
+
+      {/* Value flow legend */}
+      <div style={{ position:"absolute", bottom:8, left:12, right:120, display:"flex", gap:12, flexWrap:"wrap" }}>
         {Object.entries(VALUE_FLOW_LABELS).map(([k, v]) => (
           <div key={k} style={{ display:"flex", alignItems:"center", gap:4, fontSize:9, fontFamily:FONT.mono, color:VALUE_FLOW_COLORS[k], opacity:0.7 }}>
             <div style={{ width:6, height:6, borderRadius:"50%", background:VALUE_FLOW_COLORS[k] }} />{v}
