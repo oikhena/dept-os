@@ -2,10 +2,11 @@
 
 import { useRouter } from "next/navigation";
 import type { Department } from "../../../types/department";
-import { FONT, CLR, DETAIL, SIDEBAR } from "../../../styles/tokens";
+import { FONT, TXT, SP, RAD, CLR, GRAY, DETAIL, MOTION, T } from "../../../styles/tokens";
 import { createClient } from "../../../lib/supabase/client";
 import { saveDepartment } from "../../../lib/supabase/departments";
 import { useApp } from "../../context/AppContext";
+import { Button } from "../../../components/ui/Button";
 import GeneratePanel from "../../../components/builder/GeneratePanel";
 
 export default function GeneratePage() {
@@ -27,20 +28,22 @@ export default function GeneratePage() {
         router.push("/dept/hospital");
       }
     } else {
-      // Not signed in — can't persist, go back
       router.push("/dept/hospital");
     }
   };
 
   return (
-    <div style={{ flex: 1, display: "flex", flexDirection: "column", height: "100vh", background: DETAIL.bg }}>
-      <div style={{ background: DETAIL.bg, borderBottom: `1px solid ${CLR.borderDefault}`, padding: "0 20px", display: "flex", alignItems: "center", height: 52, flexShrink: 0, gap: 12 }}>
-        <button
-          onClick={() => router.back()}
-          style={{ background: "transparent", border: `1px solid ${CLR.borderDefault}`, color: CLR.textMuted, padding: "4px 12px", borderRadius: 6, cursor: "pointer", fontSize: 12, fontFamily: FONT.sans }}>
+    <div style={{ flex: 1, display: "flex", flexDirection: "column", height: "100vh", background: T.bgPrimary }}>
+      <div style={{
+        background: T.bgPrimary, borderBottom: `1px solid ${T.borderDefault}`,
+        padding: `0 ${SP.xl}px`, display: "flex", alignItems: "center", height: 56, flexShrink: 0, gap: SP.md,
+      }}>
+        <Button variant="ghost" size="sm" onClick={() => router.back()}>
           ← Back
-        </button>
-        <span style={{ fontFamily: FONT.sans, fontSize: 14, fontWeight: 600, color: CLR.textPrimary }}>Generate Department</span>
+        </Button>
+        <span style={{ fontFamily: FONT.sans, fontSize: TXT.lg, fontWeight: 600, color: T.textPrimary }}>
+          Generate Department
+        </span>
       </div>
       <div style={{ flex: 1, overflow: "auto" }}>
         <GeneratePanel onGenerated={handleGenerated} />

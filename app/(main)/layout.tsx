@@ -1,9 +1,11 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { AppProvider, useApp } from "../context/AppContext";
+import { ThemeProvider } from "../context/ThemeContext";
 import { DEPARTMENTS } from "../../data/templates";
-import { FONT, SIDEBAR, CLR, DETAIL } from "../../styles/tokens";
+import { FONT, MOTION, T } from "../../styles/tokens";
 import Sidebar from "../../components/sidebar/Sidebar";
 
 function MainLayout({ children }: { children: React.ReactNode }) {
@@ -11,7 +13,19 @@ function MainLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { user, savedDepts, setSavedDepts, handleLogout, advisors, activeTab, setActiveTab } = useApp();
 
-  // Derive selectedDept from pathname: /dept/[id] → id, else "hospital"
+  // Sidebar collapse state — persisted in localStorage
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  useEffect(() => {
+    const stored = localStorage.getItem("sidebar-collapsed");
+    if (stored === "true") setSidebarCollapsed(true);
+  }, []);
+  const toggleSidebar = () => {
+    setSidebarCollapsed(prev => {
+      localStorage.setItem("sidebar-collapsed", String(!prev));
+      return !prev;
+    });
+  };
+
   const selectedDept = pathname.startsWith("/dept/")
     ? pathname.replace("/dept/", "").split("?")[0]
     : "";
@@ -33,7 +47,6 @@ function MainLayout({ children }: { children: React.ReactNode }) {
   const handleAdvisorClick = (advisor: import("../../types/department").Advisor) => {
     setActiveTab(advisor.tab);
     if (advisor.filter) {
-      // Navigate with tab param — dept page reads this
       router.push(`/dept/${selectedDept}?tab=${advisor.tab}&filter=${advisor.filter}`);
     } else {
       router.push(`/dept/${selectedDept}?tab=${advisor.tab}`);
@@ -41,7 +54,10 @@ function MainLayout({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div style={{ fontFamily: FONT.sans, background: SIDEBAR.bg, color: CLR.textPrimary, height: "100vh", display: "flex", overflow: "hidden" }}>
+    <div style={{
+      fontFamily: FONT.sans, background: T.bgSecondary, color: T.textPrimary,
+      height: "100vh", display: "flex", overflow: "hidden",
+    }}>
       <Sidebar
         departments={DEPARTMENTS}
         savedDepts={savedDepts}
@@ -56,8 +72,14 @@ function MainLayout({ children }: { children: React.ReactNode }) {
         onAdvisorClick={handleAdvisorClick}
         user={user}
         onLogout={handleLogout}
+        collapsed={sidebarCollapsed}
+        onToggleCollapse={toggleSidebar}
       />
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0, background: DETAIL.bg }}>
+      <div style={{
+        flex: 1, display: "flex", flexDirection: "column", minWidth: 0,
+        background: T.bgPrimary,
+        transition: `margin ${MOTION.normal} ${MOTION.ease}`,
+      }}>
         {children}
       </div>
     </div>
@@ -66,8 +88,10 @@ function MainLayout({ children }: { children: React.ReactNode }) {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <AppProvider>
-      <MainLayout>{children}</MainLayout>
-    </AppProvider>
+    <ThemeProvider>
+      <AppProvider>
+        <MainLayout>{children}</MainLayout>
+      </AppProvider>
+    </ThemeProvider>
   );
 }

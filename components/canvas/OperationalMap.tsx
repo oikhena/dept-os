@@ -1,8 +1,9 @@
 "use client";
 import { useState, useEffect, useRef, useCallback } from "react";
 import type { Department, Role } from "../../types/department";
-import { MAP, FONT, CLR } from "../../styles/tokens";
+import { MAP, FONT, CLR, GRAY, RAD, TXT, SP, MOTION } from "../../styles/tokens";
 import { VALUE_FLOW_COLORS, VALUE_FLOW_LABELS, SENSE_COLORS } from "../../data/constants";
+import { IconButton } from "../ui/IconButton";
 
 interface OperationalMapProps {
   dept: Department;
@@ -118,7 +119,6 @@ export default function OperationalMap({
 
     const onMouseUp = () => {
       if (dragRef.current?.moved) {
-        // Persist final positions
         setLocalRoles(roles => {
           onRolesUpdate?.(roles);
           return roles;
@@ -141,7 +141,7 @@ export default function OperationalMap({
   const getWorkflowPath = (wf: { from: string; to: string }) => {
     const f = getRoleById(wf.from), t = getRoleById(wf.to);
     if (!f || !t) return "";
-    if (f.id === t.id) return `M ${f.x} ${f.y} Q ${f.x+15} ${f.y-15} ${f.x+2} ${f.y-6}`;
+    if (f.id === t.id) return `M ${f.x} ${f.y} Q ${f.x + 15} ${f.y - 15} ${f.x + 2} ${f.y - 6}`;
     const mx = (f.x + t.x) / 2, my = (f.y + t.y) / 2 - 8;
     return `M ${f.x} ${f.y} Q ${mx} ${my} ${t.x} ${t.y}`;
   };
@@ -170,7 +170,7 @@ export default function OperationalMap({
     return 1;
   };
 
-  const senseColorMap: Record<string, string> = { sight:"#60a5fa", sound:"#a78bfa", smell:"#34d399", touch:"#fb923c", taste:"#f472b6" };
+  const senseColorMap: Record<string, string> = { sight: "#60a5fa", sound: "#a78bfa", smell: "#34d399", touch: "#fb923c", taste: "#f472b6" };
   const roleSensors = (roleId: string) => (dept.sensors || []).filter(s => s.role === roleId);
   const nodeSize = 6.5;
 
@@ -191,7 +191,6 @@ export default function OperationalMap({
   const exportSvg = () => {
     const svg = svgRef.current;
     if (!svg) return;
-    // Clone and reset transform for clean export
     const clone = svg.cloneNode(true) as SVGSVGElement;
     const str = new XMLSerializer().serializeToString(clone);
     const blob = new Blob([str], { type: "image/svg+xml" });
@@ -230,18 +229,37 @@ export default function OperationalMap({
     img.src = url;
   };
 
-  const isDragging = () => !!dragRef.current || !!panRef.current;
+  const zoomIn = () => setCamera(cam => {
+    const newZoom = Math.min(5, cam.zoom * 1.25);
+    return { zoom: newZoom, panX: 50 - (50 - cam.panX) * (newZoom / cam.zoom), panY: 46 - (46 - cam.panY) * (newZoom / cam.zoom) };
+  });
+  const zoomOut = () => setCamera(cam => {
+    const newZoom = Math.max(0.4, cam.zoom / 1.25);
+    return { zoom: newZoom, panX: 50 - (50 - cam.panX) * (newZoom / cam.zoom), panY: 46 - (46 - cam.panY) * (newZoom / cam.zoom) };
+  });
+
   const zoomPct = Math.round(camera.zoom * 100);
+  const isDefaultView = camera.zoom === 1 && camera.panX === 0 && camera.panY === 0;
+
+  const toolbarBtnStyle: React.CSSProperties = {
+    background: "rgba(15,18,25,0.75)", backdropFilter: "blur(8px)",
+    border: "1px solid rgba(255,255,255,0.1)", color: CLR.textOnDark,
+    borderRadius: RAD.md, padding: `${SP.xs}px ${SP.sm}px`, cursor: "pointer",
+    fontSize: TXT.xs, fontFamily: FONT.mono, fontWeight: 500,
+    transition: `all ${MOTION.fast}`, lineHeight: 1,
+    display: "flex", alignItems: "center", justifyContent: "center",
+    minWidth: 28, height: 28,
+  };
 
   return (
-    <div ref={containerRef} style={{ width:"100%", height:"100%", background:MAP.bg, position:"relative", overflow:"hidden" }}>
+    <div ref={containerRef} style={{ width: "100%", height: "100%", background: MAP.bg, position: "relative", overflow: "hidden" }}
+      role="img" aria-label={`Operational map for ${dept.label}`}>
       <svg
         ref={svgRef}
         viewBox="0 0 100 92"
         preserveAspectRatio="xMidYMid meet"
-        style={{ width:"100%", height:"100%", display:"block", cursor: panRef.current ? "grabbing" : dragRef.current ? "grabbing" : "default" }}
+        style={{ width: "100%", height: "100%", display: "block", cursor: panRef.current ? "grabbing" : dragRef.current ? "grabbing" : "default" }}
         onMouseDown={e => {
-          // Pan on background click (not on nodes/edges)
           const tag = (e.target as Element).tagName;
           if (tag === "svg" || tag === "rect" && (e.target as Element).getAttribute("fill") === "url(#dotgrid)") {
             const svgPt = toSvgCoords(e.clientX, e.clientY);
@@ -283,7 +301,7 @@ export default function OperationalMap({
         </radialGradient>
         <rect width="100" height="92" fill="url(#centerGlow)" />
 
-        {/* Camera group — all content is panned/zoomed here */}
+        {/* Camera group */}
         <g transform={`translate(${camera.panX} ${camera.panY}) scale(${camera.zoom})`}>
 
           {/* Workflow edges */}
@@ -298,14 +316,14 @@ export default function OperationalMap({
             if (!f || !t) return null;
             const mx = (f.x + t.x) / 2, my = (f.y + t.y) / 2 - 8;
             return (
-              <g key={wf.id} style={{ opacity, transition:"opacity 0.4s" }}>
-                <path d={getWorkflowPath(wf)} fill="none" stroke="transparent" strokeWidth={4} style={{ cursor:"pointer" }}
+              <g key={wf.id} style={{ opacity, transition: "opacity 0.4s" }}>
+                <path d={getWorkflowPath(wf)} fill="none" stroke="transparent" strokeWidth={4} style={{ cursor: "pointer" }}
                   onMouseEnter={() => setHoveredWorkflow(wf.id)} onMouseLeave={() => setHoveredWorkflow(null)} />
                 <path id={pid} d={getWorkflowPath(wf)} fill="none"
                   stroke={isActive ? vfc + "bb" : vfc + "55"} strokeWidth={isActive ? 0.7 : 0.35}
                   strokeDasharray={wf.valueFlow === "costSink" ? "2,1.5" : wf.valueFlow === "valueLeak" ? "1,1.5" : "none"}
                   markerEnd={isActive ? `url(#arr-${wf.valueFlow})` : "url(#arr-dim)"}
-                  style={{ transition:"stroke 0.2s, stroke-width 0.2s" }} pointerEvents="none" />
+                  style={{ transition: "stroke 0.2s, stroke-width 0.2s" }} pointerEvents="none" />
                 {Array.from({ length: pCount }).map((_, i) => (
                   <circle key={i} r={isActive && i === 0 ? 1 : 0.6} fill={vfc}
                     opacity={isActive ? (i === 0 ? 0.95 : 0.5) : 0.35} pointerEvents="none"
@@ -339,7 +357,7 @@ export default function OperationalMap({
               <g key={role.id}
                 style={{ opacity, transition: isDraggingThis ? "none" : "opacity 0.4s", cursor: isDraggingThis ? "grabbing" : "grab" }}
                 onClick={e => {
-                  if (dragRef.current?.moved) return; // suppress click after drag
+                  if (dragRef.current?.moved) return;
                   setSelectedNode(isSel ? null : role.id);
                 }}
                 onMouseDown={e => {
@@ -360,7 +378,7 @@ export default function OperationalMap({
                   strokeWidth={isSel || isDraggingThis ? 0.7 : 0.4}
                   filter={isSel ? "url(#nodeGlow)" : "url(#nodeShadow)"}
                   style={{ transition: isDraggingThis ? "none" : "all 0.3s" }} />
-                <text x={role.x} y={role.y + 1.5} textAnchor="middle" fontSize={5.5 * scale} style={{ userSelect:"none", pointerEvents:"none" }}>{role.icon}</text>
+                <text x={role.x} y={role.y + 1.5} textAnchor="middle" fontSize={5.5 * scale} style={{ userSelect: "none", pointerEvents: "none" }}>{role.icon}</text>
                 <rect x={role.x - 12} y={role.y + s + 1.5} width={24} height={5} rx={1.5} fill={MAP.labelBg} />
                 {isEditing ? (
                   <foreignObject x={role.x - 13} y={role.y + s + 1} width={26} height={7}>
@@ -374,12 +392,12 @@ export default function OperationalMap({
                       }}
                       onBlur={() => commitEdit(role.id, editLabel)}
                       autoFocus
-                      style={{ width: "100%", height: "100%", fontSize: "4px", fontFamily: "'IBM Plex Mono',monospace", background: "#1e2235", border: `1px solid ${accentColor}`, borderRadius: "2px", textAlign: "center", padding: "1px 2px", color: "#e5e7eb", outline: "none", boxSizing: "border-box" }}
+                      style={{ width: "100%", height: "100%", fontSize: "4px", fontFamily: FONT.mono, background: "#1e2235", border: `1px solid ${accentColor}`, borderRadius: "2px", textAlign: "center", padding: "1px 2px", color: "#e5e7eb", outline: "none", boxSizing: "border-box" }}
                     />
                   </foreignObject>
                 ) : (
-                  <text x={role.x} y={role.y + s + 5} textAnchor="middle" fill={isSel ? accentColor : CLR.textOnDark} fontSize="2.6" fontFamily={FONT.mono}
-                    style={{ pointerEvents:"none", letterSpacing:"0.03em" }}>
+                  <text x={role.x} y={role.y + s + 5} textAnchor="middle" fill={isSel ? accentColor : CLR.textOnDark} fontSize="2.8" fontFamily={FONT.mono}
+                    style={{ pointerEvents: "none", letterSpacing: "0.03em" }}>
                     {role.label.length > 18 ? role.label.slice(0, 17) + "\u2026" : role.label}
                   </text>
                 )}
@@ -393,7 +411,7 @@ export default function OperationalMap({
                     <circle key={sens.id} cx={sx} cy={sy} r={1.2}
                       fill={senseColorMap[sens.sense] || "#94a3b8"}
                       opacity={0.7 + 0.3 * Math.sin(pulsePhase * 0.06 + si)}
-                      style={{ transition:"cx 0.1s, cy 0.1s" }} pointerEvents="none">
+                      style={{ transition: "cx 0.1s, cy 0.1s" }} pointerEvents="none">
                       <title>{sens.sense}: {sens.label}</title>
                     </circle>
                   );
@@ -406,8 +424,8 @@ export default function OperationalMap({
                   if (!scCount && !suCount) return null;
                   return (
                     <g>
-                      {scCount > 0 && <text x={role.x + s + 1} y={role.y - 1} fontSize="3.5" style={{ pointerEvents:"none" }}>🔁</text>}
-                      {suCount > 0 && <text x={role.x + s + 1} y={role.y + 3} fontSize="3.5" style={{ pointerEvents:"none" }}>⚡</text>}
+                      {scCount > 0 && <text x={role.x + s + 1} y={role.y - 1} fontSize="3.5" style={{ pointerEvents: "none" }}>🔁</text>}
+                      {suCount > 0 && <text x={role.x + s + 1} y={role.y + 3} fontSize="3.5" style={{ pointerEvents: "none" }}>⚡</text>}
                     </g>
                   );
                 })()}
@@ -417,39 +435,75 @@ export default function OperationalMap({
         </g>
       </svg>
 
-      {/* Toolbar overlay */}
-      <div style={{ position:"absolute", top:8, right:8, display:"flex", gap:4, zIndex:10 }}>
-        {camera.zoom !== 1 && (
-          <div style={{ background:"rgba(0,0,0,0.5)", color:CLR.textOnDark, borderRadius:3, padding:"3px 7px", fontSize:9, fontFamily:FONT.mono, display:"flex", alignItems:"center" }}>
+      {/* Toolbar overlay — top right */}
+      <div style={{
+        position: "absolute", top: SP.sm, right: SP.sm,
+        display: "flex", flexDirection: "column", gap: 2, zIndex: 10,
+      }}>
+        {/* Zoom controls */}
+        <div style={{
+          display: "flex", flexDirection: "column",
+          background: "rgba(15,18,25,0.75)", backdropFilter: "blur(8px)",
+          border: "1px solid rgba(255,255,255,0.1)", borderRadius: RAD.md,
+          overflow: "hidden",
+        }}>
+          <button onClick={zoomIn} title="Zoom in" aria-label="Zoom in"
+            style={{ ...toolbarBtnStyle, background: "transparent", border: "none", borderBottom: "1px solid rgba(255,255,255,0.08)", borderRadius: 0 }}>
+            +
+          </button>
+          <div style={{
+            fontSize: 9, color: GRAY[400], textAlign: "center",
+            padding: `2px ${SP.xs}px`, fontFamily: FONT.mono, minWidth: 28,
+            borderBottom: "1px solid rgba(255,255,255,0.08)",
+          }}>
             {zoomPct}%
           </div>
-        )}
-        <button onClick={() => setCamera(RESET_CAMERA)} title="Reset view (double-click background)"
-          style={{ background:"rgba(0,0,0,0.5)", border:"1px solid rgba(255,255,255,0.1)", color:CLR.textOnDark, borderRadius:3, padding:"3px 8px", cursor:"pointer", fontSize:10, fontFamily:FONT.mono }}>
-          ⊡
-        </button>
-        <button onClick={exportSvg} title="Export as SVG"
-          style={{ background:"rgba(0,0,0,0.5)", border:"1px solid rgba(255,255,255,0.1)", color:CLR.textOnDark, borderRadius:3, padding:"3px 8px", cursor:"pointer", fontSize:10, fontFamily:FONT.mono }}>
-          SVG
-        </button>
-        <button onClick={exportPng} title="Export as PNG (4×)"
-          style={{ background:"rgba(0,0,0,0.5)", border:"1px solid rgba(255,255,255,0.1)", color:CLR.textOnDark, borderRadius:3, padding:"3px 8px", cursor:"pointer", fontSize:10, fontFamily:FONT.mono }}>
-          PNG
-        </button>
+          <button onClick={zoomOut} title="Zoom out" aria-label="Zoom out"
+            style={{ ...toolbarBtnStyle, background: "transparent", border: "none", borderRadius: 0 }}>
+            −
+          </button>
+        </div>
+
+        {/* Reset + Export */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 2, marginTop: SP.xs }}>
+          <button onClick={() => setCamera(RESET_CAMERA)} title="Reset view" aria-label="Reset view"
+            style={toolbarBtnStyle}>
+            ⊡
+          </button>
+          <button onClick={exportSvg} title="Export SVG" aria-label="Export as SVG"
+            style={toolbarBtnStyle}>
+            SVG
+          </button>
+          <button onClick={exportPng} title="Export PNG (4×)" aria-label="Export as PNG"
+            style={toolbarBtnStyle}>
+            PNG
+          </button>
+        </div>
       </div>
 
       {/* Hint when zoom is default */}
-      {camera.zoom === 1 && camera.panX === 0 && camera.panY === 0 && (
-        <div style={{ position:"absolute", bottom:28, right:8, fontSize:8, color:"rgba(255,255,255,0.2)", fontFamily:FONT.mono, pointerEvents:"none" }}>
-          scroll to zoom · drag to pan · drag nodes · dbl-click label to edit
+      {isDefaultView && (
+        <div style={{
+          position: "absolute", bottom: SP.xxl, right: SP.sm,
+          fontSize: TXT.xs, color: "rgba(255,255,255,0.25)", fontFamily: FONT.mono,
+          pointerEvents: "none", textAlign: "right", lineHeight: 1.6,
+        }}>
+          scroll to zoom<br />drag to pan<br />drag nodes<br />dbl-click to edit
         </div>
       )}
 
       {/* Value flow legend */}
-      <div style={{ position:"absolute", bottom:8, left:12, right:120, display:"flex", gap:12, flexWrap:"wrap" }}>
+      <div style={{
+        position: "absolute", bottom: SP.sm, left: SP.md, right: 100,
+        display: "flex", gap: SP.md, flexWrap: "wrap",
+      }}>
         {Object.entries(VALUE_FLOW_LABELS).map(([k, v]) => (
-          <div key={k} style={{ display:"flex", alignItems:"center", gap:4, fontSize:9, fontFamily:FONT.mono, color:VALUE_FLOW_COLORS[k], opacity:0.7 }}>
-            <div style={{ width:6, height:6, borderRadius:"50%", background:VALUE_FLOW_COLORS[k] }} />{v}
+          <div key={k} style={{
+            display: "flex", alignItems: "center", gap: SP.xs,
+            fontSize: TXT.xs, fontFamily: FONT.mono, color: VALUE_FLOW_COLORS[k], opacity: 0.7,
+          }}>
+            <div style={{ width: 6, height: 6, borderRadius: "50%", background: VALUE_FLOW_COLORS[k] }} />
+            {v}
           </div>
         ))}
       </div>
