@@ -9,6 +9,7 @@ import { loadUserDepartments } from "../../lib/supabase/departments";
 
 interface AppContextValue {
   user: User | null;
+  authLoading: boolean;
   savedDepts: SavedDepartment[];
   setSavedDepts: React.Dispatch<React.SetStateAction<SavedDepartment[]>>;
   handleLogout: () => Promise<void>;
@@ -22,6 +23,7 @@ const AppContext = createContext<AppContextValue | null>(null);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [authLoading, setAuthLoading] = useState(true);
   const [savedDepts, setSavedDepts] = useState<SavedDepartment[]>([]);
   const [advisors, setAdvisors] = useState<Advisor[]>([]);
   const [activeTab, setActiveTab] = useState("overview");
@@ -30,12 +32,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     const supabase = createClient();
     supabase.auth.getUser().then(({ data: { user } }) => {
       setUser(user);
+      setAuthLoading(false);
       if (user) {
         loadUserDepartments(supabase).then(setSavedDepts).catch(console.error);
       }
     });
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
+      setAuthLoading(false);
       if (session?.user) {
         loadUserDepartments(supabase).then(setSavedDepts).catch(console.error);
       } else {
@@ -53,7 +57,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AppContext.Provider value={{ user, savedDepts, setSavedDepts, handleLogout, advisors, setAdvisors, activeTab, setActiveTab }}>
+    <AppContext.Provider value={{ user, authLoading, savedDepts, setSavedDepts, handleLogout, advisors, setAdvisors, activeTab, setActiveTab }}>
       {children}
     </AppContext.Provider>
   );

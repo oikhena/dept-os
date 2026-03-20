@@ -5,7 +5,9 @@ import type { Department } from "../../types/department";
 import { useChat } from "../../hooks/useChat";
 import { buildChatSystemPrompt } from "../../lib/ai/prompts";
 import { refineDepartment } from "../../lib/ai/refine";
-import { TXT, SP, RAD, LH, FONT, CLR, DETAIL } from "../../styles/tokens";
+import { TXT, SP, RAD, LH, LS, FONT, CLR, DETAIL, GRAY, MOTION, SHADOW, T } from "../../styles/tokens";
+import { Button } from "../ui/Button";
+import { IconButton } from "../ui/IconButton";
 
 interface Props {
   dept: Department;
@@ -23,19 +25,17 @@ export default function DeptChat({ dept, accentColor, savedDeptId, onClose, onRe
   const { messages, sendMessage, isLoading: chatLoading, reset } = useChat(systemPrompt, savedDeptId);
 
   const [mode, setMode] = useState<Mode>("chat");
-
-  // Chat state
   const [input, setInput] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  // Refine state
   const [refineInput, setRefineInput] = useState("");
   const [refinePhase, setRefinePhase] = useState<RefinePhase>("idle");
-  const [refineProgress, setRefineProgress] = useState(0); // chars streamed
+  const [refineProgress, setRefineProgress] = useState(0);
   const [refinedDept, setRefinedDept] = useState<Department | null>(null);
   const [refineError, setRefineError] = useState<string | null>(null);
   const refineAbortRef = useRef<AbortController | null>(null);
+  const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
 
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
   useEffect(() => { reset(); setRefinedDept(null); setRefinePhase("idle"); }, [dept.label]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -46,6 +46,12 @@ export default function DeptChat({ dept, accentColor, savedDeptId, onClose, onRe
     setInput("");
     sendMessage(text);
     setTimeout(() => inputRef.current?.focus(), 0);
+  };
+
+  const copyMessage = (content: string, idx: number) => {
+    navigator.clipboard.writeText(content);
+    setCopiedIdx(idx);
+    setTimeout(() => setCopiedIdx(null), 2000);
   };
 
   const startRefine = async () => {
@@ -59,8 +65,7 @@ export default function DeptChat({ dept, accentColor, savedDeptId, onClose, onRe
     refineAbortRef.current = new AbortController();
     try {
       const result = await refineDepartment(
-        dept,
-        instruction,
+        dept, instruction,
         (acc, partial) => {
           setRefineProgress(acc.length);
           if (partial) setRefinedDept(partial);
@@ -110,43 +115,89 @@ export default function DeptChat({ dept, accentColor, savedDeptId, onClose, onRe
   const progressPct = refinePhase === "streaming" ? Math.min(95, (refineProgress / 3000) * 100) : refinePhase === "ready" ? 100 : 0;
 
   return (
-    <div style={{ width: 340, flexShrink: 0, display: "flex", flexDirection: "column", borderLeft: `1px solid ${CLR.borderDefault}`, background: DETAIL.bg, height: "100%" }}>
-
+    <div
+      role="complementary"
+      aria-label="Department chat"
+      style={{
+        width: 380, flexShrink: 0,
+        display: "flex", flexDirection: "column",
+        borderLeft: `1px solid ${T.borderDefault}`,
+        background: T.bgPrimary, height: "100%",
+        animation: "slideInRight 0.2s ease",
+        boxShadow: SHADOW.lg,
+      }}
+    >
       {/* Header */}
-      <div style={{ padding: "0 16px", height: 52, display: "flex", alignItems: "center", gap: 10, borderBottom: `1px solid ${CLR.borderDefault}`, flexShrink: 0 }}>
-        <div style={{ width: 28, height: 28, borderRadius: "50%", background: accentColor + "18", border: `1px solid ${accentColor}30`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14 }}>
+      <div style={{
+        padding: "0 16px", height: 56,
+        display: "flex", alignItems: "center", gap: 10,
+        borderBottom: `1px solid ${T.borderDefault}`, flexShrink: 0,
+      }}>
+        <div style={{
+          width: 30, height: 30, borderRadius: RAD.full,
+          background: accentColor + "15", border: `1px solid ${accentColor}25`,
+          display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16,
+        }}>
           {dept.icon}
         </div>
         {/* Mode tabs */}
-        <div style={{ flex: 1, display: "flex", gap: 0, background: "#f0f2f5", borderRadius: RAD.md, padding: 2 }}>
+        <div style={{
+          flex: 1, display: "flex", gap: 0,
+          background: T.bgSurface, borderRadius: RAD.md, padding: 2,
+        }}>
           {(["chat", "refine"] as Mode[]).map(m => (
             <button key={m} onClick={() => setMode(m)}
-              style={{ flex: 1, background: mode === m ? "#ffffff" : "transparent", border: "none", borderRadius: RAD.sm, padding: "4px 0", cursor: "pointer", fontSize: 11, fontFamily: FONT.sans, fontWeight: mode === m ? 600 : 500, color: mode === m ? CLR.textPrimary : CLR.textMuted, transition: "all 0.12s", boxShadow: mode === m ? "0 1px 3px rgba(0,0,0,0.08)" : "none" }}>
+              style={{
+                flex: 1, background: mode === m ? T.bgPrimary : "transparent",
+                border: "none", borderRadius: RAD.sm, padding: "5px 0",
+                cursor: "pointer", fontSize: TXT.sm, fontFamily: FONT.sans,
+                fontWeight: mode === m ? 600 : 500,
+                color: mode === m ? T.textPrimary : T.textMuted,
+                transition: `all ${MOTION.fast}`,
+                boxShadow: mode === m ? T.shadowSm : "none",
+              }}>
               {m === "chat" ? "💬 Chat" : "✦ Refine"}
             </button>
           ))}
         </div>
         {mode === "chat" && messages.length > 0 && (
-          <button onClick={reset} style={{ background: "transparent", border: "none", color: CLR.textMuted, cursor: "pointer", fontSize: 11, fontFamily: FONT.sans, padding: "3px 6px", borderRadius: RAD.sm }}>clear</button>
+          <Button variant="ghost" size="sm" onClick={reset}
+            style={{ fontSize: TXT.xs, padding: "0 8px", height: 26 }}>
+            clear
+          </Button>
         )}
-        <button onClick={onClose} style={{ background: "transparent", border: "none", color: CLR.textMuted, cursor: "pointer", fontSize: 16, lineHeight: 1, padding: "2px 4px" }}>✕</button>
+        <IconButton label="Close chat" onClick={onClose} size={28} variant="ghost">✕</IconButton>
       </div>
 
       {/* ── CHAT MODE ── */}
       {mode === "chat" && (
         <>
-          <div style={{ flex: 1, overflowY: "auto", padding: "16px 14px", display: "flex", flexDirection: "column", gap: 12 }}>
+          <div style={{ flex: 1, overflowY: "auto", padding: "16px 14px", display: "flex", flexDirection: "column", gap: 14 }}>
             {messages.length === 0 && (
               <div>
-                <div style={{ fontSize: TXT.sm, color: CLR.textMuted, fontFamily: FONT.sans, marginBottom: 14, lineHeight: LH.relaxed }}>
+                <div style={{ fontSize: TXT.sm, color: T.textMuted, fontFamily: FONT.sans, marginBottom: 16, lineHeight: LH.relaxed }}>
                   Ask anything about this institution — roles, workflows, AI opportunities, cost leaks, or how to prioritize.
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                   {starters.map(s => (
                     <button key={s} onClick={() => sendMessage(s)}
-                      style={{ background: "#f8f9fb", border: `1px solid ${CLR.borderDefault}`, borderRadius: RAD.md, padding: "7px 12px", cursor: "pointer", textAlign: "left", fontSize: TXT.sm, color: CLR.textSecondary, fontFamily: FONT.sans, lineHeight: LH.normal, transition: "border-color 0.12s" }}
-                      onMouseEnter={e => (e.currentTarget.style.borderColor = accentColor + "60")}
-                      onMouseLeave={e => (e.currentTarget.style.borderColor = CLR.borderDefault)}>
+                      style={{
+                        background: T.bgSecondary, border: `1px solid ${T.borderDefault}`,
+                        borderRadius: RAD.lg, padding: "10px 14px",
+                        cursor: "pointer", textAlign: "left",
+                        fontSize: TXT.sm, color: T.textSecondary, fontFamily: FONT.sans,
+                        lineHeight: LH.normal, transition: `all ${MOTION.fast}`,
+                        display: "flex", alignItems: "center", gap: 8,
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.borderColor = accentColor + "60";
+                        e.currentTarget.style.background = accentColor + "06";
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.borderColor = T.borderDefault;
+                        e.currentTarget.style.background = T.bgSecondary;
+                      }}>
+                      <span style={{ color: accentColor, fontSize: TXT.md }}>→</span>
                       {s}
                     </button>
                   ))}
@@ -154,79 +205,143 @@ export default function DeptChat({ dept, accentColor, savedDeptId, onClose, onRe
               </div>
             )}
             {messages.map((msg, i) => (
-              <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: msg.role === "user" ? "flex-end" : "flex-start" }}>
+              <div key={i} style={{
+                display: "flex", flexDirection: "column",
+                alignItems: msg.role === "user" ? "flex-end" : "flex-start",
+                animation: "fadeIn 0.15s ease",
+              }}>
                 <div style={{
-                  maxWidth: "88%",
-                  background: msg.role === "user" ? accentColor : "#f8f9fb",
-                  color: msg.role === "user" ? "#ffffff" : CLR.textPrimary,
-                  border: msg.role === "user" ? "none" : `1px solid ${CLR.borderDefault}`,
-                  borderRadius: msg.role === "user" ? `${RAD.lg}px ${RAD.lg}px ${RAD.sm}px ${RAD.lg}px` : `${RAD.lg}px ${RAD.lg}px ${RAD.lg}px ${RAD.sm}px`,
-                  padding: "8px 12px",
-                  fontSize: TXT.md,
-                  fontFamily: FONT.sans,
+                  maxWidth: "88%", position: "relative",
+                  background: msg.role === "user" ? accentColor : T.bgSecondary,
+                  color: msg.role === "user" ? "#ffffff" : T.textPrimary,
+                  border: msg.role === "user" ? "none" : `1px solid ${T.borderDefault}`,
+                  borderRadius: msg.role === "user"
+                    ? `${RAD.lg}px ${RAD.lg}px ${RAD.sm}px ${RAD.lg}px`
+                    : `${RAD.lg}px ${RAD.lg}px ${RAD.lg}px ${RAD.sm}px`,
+                  padding: "10px 14px",
+                  fontSize: TXT.md, fontFamily: FONT.sans,
                   lineHeight: LH.relaxed,
-                  whiteSpace: "pre-wrap",
-                  wordBreak: "break-word",
+                  whiteSpace: "pre-wrap", wordBreak: "break-word",
                 }}>
-                  {msg.content || (chatLoading && i === messages.length - 1 ? <span style={{ opacity: 0.5 }}>thinking…</span> : null)}
+                  {msg.content || (chatLoading && i === messages.length - 1 ? (
+                    <span style={{ display: "flex", gap: 4, alignItems: "center" }}>
+                      <span style={{ width: 6, height: 6, borderRadius: "50%", background: GRAY[400], animation: "pulse 1s ease infinite" }} />
+                      <span style={{ width: 6, height: 6, borderRadius: "50%", background: GRAY[400], animation: "pulse 1s ease 0.2s infinite" }} />
+                      <span style={{ width: 6, height: 6, borderRadius: "50%", background: GRAY[400], animation: "pulse 1s ease 0.4s infinite" }} />
+                    </span>
+                  ) : null)}
                 </div>
+                {/* Copy button for AI messages */}
+                {msg.role === "assistant" && msg.content && (
+                  <button
+                    onClick={() => copyMessage(msg.content, i)}
+                    style={{
+                      background: "transparent", border: "none",
+                      color: copiedIdx === i ? CLR.success : GRAY[400],
+                      cursor: "pointer", fontSize: TXT.xs, fontFamily: FONT.sans,
+                      padding: "2px 4px", marginTop: 2,
+                      transition: `color ${MOTION.fast}`,
+                    }}>
+                    {copiedIdx === i ? "✓ Copied" : "Copy"}
+                  </button>
+                )}
               </div>
             ))}
             <div ref={bottomRef} />
           </div>
 
-          <div style={{ padding: "10px 12px", borderTop: `1px solid ${CLR.borderDefault}`, flexShrink: 0 }}>
+          <div style={{ padding: "12px 14px", borderTop: `1px solid ${T.borderDefault}`, flexShrink: 0 }}>
             <div style={{ display: "flex", gap: 8, alignItems: "flex-end" }}>
               <textarea
                 ref={inputRef}
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); submitChat(); } }}
-                placeholder="Ask a question…"
+                placeholder="Ask a question..."
                 rows={1}
-                style={{ flex: 1, resize: "none", border: `1px solid ${CLR.borderDefault}`, borderRadius: RAD.md, padding: "8px 10px", fontSize: TXT.md, fontFamily: FONT.sans, color: CLR.textPrimary, background: "#ffffff", outline: "none", lineHeight: LH.normal, maxHeight: 100, overflowY: "auto" }}
+                aria-label="Chat message"
+                style={{
+                  flex: 1, resize: "none",
+                  border: `1px solid ${T.borderDefault}`, borderRadius: RAD.lg,
+                  padding: "10px 12px", fontSize: TXT.md, fontFamily: FONT.sans,
+                  color: T.textPrimary, background: T.bgPrimary, outline: "none",
+                  lineHeight: LH.normal, maxHeight: 100, overflowY: "auto",
+                  transition: `border-color ${MOTION.fast}`,
+                }}
+                onFocus={e => e.currentTarget.style.borderColor = accentColor}
+                onBlur={e => e.currentTarget.style.borderColor = T.borderDefault}
                 onInput={e => { const el = e.currentTarget; el.style.height = "auto"; el.style.height = Math.min(el.scrollHeight, 100) + "px"; }}
               />
-              <button onClick={submitChat} disabled={!input.trim() || chatLoading}
-                style={{ background: !input.trim() || chatLoading ? CLR.borderDefault : accentColor, color: !input.trim() || chatLoading ? CLR.textMuted : "#ffffff", border: "none", borderRadius: RAD.md, padding: "8px 14px", cursor: !input.trim() || chatLoading ? "default" : "pointer", fontSize: TXT.md, fontFamily: FONT.sans, fontWeight: 600, transition: "background 0.12s", flexShrink: 0, height: 36 }}>
+              <Button
+                variant="primary"
+                size="md"
+                onClick={submitChat}
+                disabled={!input.trim() || chatLoading}
+                style={{
+                  background: !input.trim() || chatLoading ? GRAY[200] : accentColor,
+                  borderColor: !input.trim() || chatLoading ? GRAY[200] : accentColor,
+                  height: 38, width: 38, padding: 0,
+                }}>
                 ↑
-              </button>
+              </Button>
             </div>
-            <div style={{ fontSize: 10, color: CLR.textMuted, fontFamily: FONT.sans, marginTop: 5 }}>Enter to send · Shift+Enter for newline</div>
+            <div style={{ fontSize: TXT.xs, color: GRAY[400], fontFamily: FONT.sans, marginTop: 6 }}>
+              Enter to send · Shift+Enter for newline
+            </div>
           </div>
         </>
       )}
 
       {/* ── REFINE MODE ── */}
       {mode === "refine" && (
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "16px 14px", gap: 14, overflowY: "auto" }}>
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "16px 14px", gap: 16, overflowY: "auto" }}>
 
           {refinePhase === "idle" && (
             <>
-              <div style={{ fontSize: TXT.sm, color: CLR.textSecondary, fontFamily: FONT.sans, lineHeight: LH.relaxed }}>
+              <div style={{ fontSize: TXT.sm, color: T.textSecondary, fontFamily: FONT.sans, lineHeight: LH.relaxed }}>
                 Describe how to transform this department. Claude will regenerate it with your changes applied — roles, workflows, agents, and all.
               </div>
               <textarea
                 value={refineInput}
                 onChange={e => setRefineInput(e.target.value)}
                 onKeyDown={e => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) startRefine(); }}
-                placeholder="e.g. Make this a rural clinic with limited connectivity…"
+                placeholder="e.g. Make this a rural clinic with limited connectivity..."
                 rows={4}
-                style={{ resize: "vertical", border: `1px solid ${CLR.borderDefault}`, borderRadius: RAD.md, padding: "10px 12px", fontSize: TXT.md, fontFamily: FONT.sans, color: CLR.textPrimary, background: "#ffffff", outline: "none", lineHeight: LH.relaxed, minHeight: 90 }}
+                aria-label="Refinement instruction"
+                style={{
+                  resize: "vertical", border: `1px solid ${T.borderDefault}`,
+                  borderRadius: RAD.lg, padding: "12px 14px",
+                  fontSize: TXT.md, fontFamily: FONT.sans,
+                  color: T.textPrimary, background: T.bgPrimary, outline: "none",
+                  lineHeight: LH.relaxed, minHeight: 90,
+                  transition: `border-color ${MOTION.fast}`,
+                }}
+                onFocus={e => e.currentTarget.style.borderColor = accentColor}
+                onBlur={e => e.currentTarget.style.borderColor = T.borderDefault}
               />
-              <button onClick={startRefine} disabled={!refineInput.trim()}
-                style={{ background: refineInput.trim() ? accentColor : CLR.borderDefault, color: refineInput.trim() ? "#ffffff" : CLR.textMuted, border: "none", borderRadius: RAD.md, padding: "10px 0", cursor: refineInput.trim() ? "pointer" : "default", fontSize: TXT.md, fontFamily: FONT.sans, fontWeight: 600 }}>
+              <Button variant="primary" size="md" onClick={startRefine} disabled={!refineInput.trim()}
+                style={{
+                  width: "100%",
+                  background: refineInput.trim() ? accentColor : GRAY[200],
+                  borderColor: refineInput.trim() ? accentColor : GRAY[200],
+                }}>
                 Refine Department →
-              </button>
-              <div style={{ fontSize: 10, color: CLR.textMuted, fontFamily: FONT.sans, marginTop: -6 }}>⌘↵ to submit</div>
-              <div style={{ borderTop: `1px solid ${CLR.borderDefault}`, paddingTop: 12 }}>
-                <div style={{ fontSize: 10, color: CLR.textMuted, fontFamily: FONT.sans, fontWeight: 600, letterSpacing: "0.08em", marginBottom: 8 }}>EXAMPLES</div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              </Button>
+              <div style={{ fontSize: TXT.xs, color: GRAY[400], fontFamily: FONT.sans, marginTop: -8 }}>⌘↵ to submit</div>
+              <div style={{ borderTop: `1px solid ${T.borderDefault}`, paddingTop: 14 }}>
+                <div style={{ fontSize: TXT.xs, color: T.textMuted, fontFamily: FONT.sans, fontWeight: 600, letterSpacing: LS.wide, marginBottom: 10 }}>EXAMPLES</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                   {refineExamples.map(ex => (
                     <button key={ex} onClick={() => setRefineInput(ex)}
-                      style={{ background: "#f8f9fb", border: `1px solid ${CLR.borderDefault}`, borderRadius: RAD.md, padding: "6px 10px", cursor: "pointer", textAlign: "left", fontSize: TXT.sm, color: CLR.textSecondary, fontFamily: FONT.sans, lineHeight: LH.normal }}
-                      onMouseEnter={e => (e.currentTarget.style.borderColor = accentColor + "60")}
-                      onMouseLeave={e => (e.currentTarget.style.borderColor = CLR.borderDefault)}>
+                      style={{
+                        background: T.bgSecondary, border: `1px solid ${T.borderDefault}`,
+                        borderRadius: RAD.lg, padding: "8px 12px",
+                        cursor: "pointer", textAlign: "left",
+                        fontSize: TXT.sm, color: T.textSecondary, fontFamily: FONT.sans,
+                        lineHeight: LH.normal, transition: `all ${MOTION.fast}`,
+                      }}
+                      onMouseEnter={e => { e.currentTarget.style.borderColor = accentColor + "60"; e.currentTarget.style.background = accentColor + "06"; }}
+                      onMouseLeave={e => { e.currentTarget.style.borderColor = T.borderDefault; e.currentTarget.style.background = T.bgSecondary; }}>
                       {ex}
                     </button>
                   ))}
@@ -237,32 +352,37 @@ export default function DeptChat({ dept, accentColor, savedDeptId, onClose, onRe
 
           {(refinePhase === "streaming" || refinePhase === "ready") && (
             <>
-              <div style={{ fontSize: TXT.sm, color: CLR.textSecondary, fontFamily: FONT.sans, lineHeight: LH.normal }}>
-                <span style={{ fontWeight: 600, color: CLR.textPrimary }}>"{refineInput}"</span>
+              <div style={{ fontSize: TXT.sm, color: T.textSecondary, fontFamily: FONT.sans }}>
+                <span style={{ fontWeight: 600, color: T.textPrimary }}>&ldquo;{refineInput}&rdquo;</span>
               </div>
 
-              {/* Progress bar */}
               <div>
-                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6, fontSize: 10, fontFamily: FONT.sans }}>
-                  <span style={{ color: CLR.textMuted }}>{refinePhase === "ready" ? "✓ Ready to apply" : "Regenerating…"}</span>
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8, fontSize: TXT.xs, fontFamily: FONT.sans }}>
+                  <span style={{ color: GRAY[500] }}>{refinePhase === "ready" ? "✓ Ready to apply" : "Regenerating..."}</span>
                   <span style={{ color: accentColor, fontFamily: FONT.mono }}>{Math.round(progressPct)}%</span>
                 </div>
-                <div style={{ height: 4, background: "#f0f2f5", borderRadius: 2, overflow: "hidden" }}>
-                  <div style={{ height: "100%", width: `${progressPct}%`, background: refinePhase === "ready" ? "#22c55e" : accentColor, borderRadius: 2, transition: "width 0.15s ease" }} />
+                <div style={{ height: 4, background: T.bgSurface, borderRadius: 2, overflow: "hidden" }}>
+                  <div style={{
+                    height: "100%", width: `${progressPct}%`,
+                    background: refinePhase === "ready" ? CLR.success : accentColor,
+                    borderRadius: 2, transition: "width 0.15s ease",
+                  }} />
                 </div>
               </div>
 
-              {/* Preview of refined dept */}
               {refinedDept && (
-                <div style={{ background: "#f8f9fb", border: `1px solid ${CLR.borderDefault}`, borderRadius: RAD.lg, padding: "12px 14px" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                    <span style={{ fontSize: 20 }}>{refinedDept.icon}</span>
+                <div style={{
+                  background: T.bgSecondary, border: `1px solid ${T.borderDefault}`,
+                  borderRadius: RAD.lg, padding: "14px 16px",
+                }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
+                    <span style={{ fontSize: 22 }}>{refinedDept.icon}</span>
                     <div>
-                      <div style={{ fontSize: TXT.md, fontWeight: 700, color: CLR.textPrimary, fontFamily: FONT.sans }}>{refinedDept.label}</div>
-                      {refinedDept.region && <div style={{ fontSize: 10, color: CLR.textMuted, fontFamily: FONT.sans }}>{refinedDept.region}</div>}
+                      <div style={{ fontSize: TXT.md, fontWeight: 700, color: T.textPrimary, fontFamily: FONT.sans }}>{refinedDept.label}</div>
+                      {refinedDept.region && <div style={{ fontSize: TXT.sm, color: GRAY[500], fontFamily: FONT.sans }}>{refinedDept.region}</div>}
                     </div>
                   </div>
-                  <div style={{ display: "flex", gap: 12, fontSize: 11, fontFamily: FONT.mono, color: CLR.textMuted }}>
+                  <div style={{ display: "flex", gap: 14, fontSize: TXT.sm, fontFamily: FONT.mono, color: GRAY[500] }}>
                     {[
                       { v: refinedDept.roles?.length, l: "roles" },
                       { v: refinedDept.workflows?.length, l: "flows" },
@@ -270,8 +390,8 @@ export default function DeptChat({ dept, accentColor, savedDeptId, onClose, onRe
                     ].map(s => <span key={s.l}><span style={{ color: accentColor, fontWeight: 600 }}>{s.v || 0}</span> {s.l}</span>)}
                   </div>
                   {refinedDept.summary && (
-                    <div style={{ fontSize: 11, color: CLR.textSecondary, fontFamily: FONT.sans, lineHeight: LH.relaxed, marginTop: 8, borderTop: `1px solid ${CLR.borderDefault}`, paddingTop: 8 }}>
-                      {refinedDept.summary.slice(0, 120)}{refinedDept.summary.length > 120 ? "…" : ""}
+                    <div style={{ fontSize: TXT.sm, color: T.textSecondary, fontFamily: FONT.sans, lineHeight: LH.relaxed, marginTop: 10, borderTop: `1px solid ${T.borderDefault}`, paddingTop: 10 }}>
+                      {refinedDept.summary.slice(0, 140)}{refinedDept.summary.length > 140 ? "..." : ""}
                     </div>
                   )}
                 </div>
@@ -279,35 +399,33 @@ export default function DeptChat({ dept, accentColor, savedDeptId, onClose, onRe
 
               {refinePhase === "ready" && refinedDept && (
                 <div style={{ display: "flex", gap: 8 }}>
-                  <button onClick={applyRefinement}
-                    style={{ flex: 1, background: "#22c55e", color: "#ffffff", border: "none", borderRadius: RAD.md, padding: "10px 0", cursor: "pointer", fontSize: TXT.md, fontFamily: FONT.sans, fontWeight: 600 }}>
+                  <Button variant="success" size="md" onClick={applyRefinement} style={{ flex: 1, background: CLR.success, borderColor: CLR.success, color: "#fff" }}>
                     ✓ Apply Changes
-                  </button>
-                  <button onClick={cancelRefine}
-                    style={{ background: "transparent", color: CLR.textMuted, border: `1px solid ${CLR.borderDefault}`, borderRadius: RAD.md, padding: "10px 14px", cursor: "pointer", fontSize: TXT.md, fontFamily: FONT.sans }}>
-                    ✕
-                  </button>
+                  </Button>
+                  <IconButton label="Cancel" onClick={cancelRefine} size={36}>✕</IconButton>
                 </div>
               )}
 
               {refinePhase === "streaming" && (
-                <button onClick={cancelRefine}
-                  style={{ background: "transparent", color: CLR.textMuted, border: `1px solid ${CLR.borderDefault}`, borderRadius: RAD.md, padding: "8px 0", cursor: "pointer", fontSize: TXT.sm, fontFamily: FONT.sans }}>
+                <Button variant="secondary" size="sm" onClick={cancelRefine} style={{ width: "100%" }}>
                   Cancel
-                </button>
+                </Button>
               )}
             </>
           )}
 
           {refinePhase === "error" && (
             <>
-              <div style={{ background: "#fef2f2", border: "1px solid #fecaca", borderRadius: RAD.md, padding: "10px 14px", fontSize: TXT.sm, color: "#ef4444", fontFamily: FONT.sans, lineHeight: LH.normal }}>
+              <div style={{
+                background: "#fef2f2", border: "1px solid #fecaca",
+                borderRadius: RAD.lg, padding: "12px 16px",
+                fontSize: TXT.sm, color: CLR.danger, fontFamily: FONT.sans, lineHeight: LH.normal,
+              }}>
                 {refineError || "Refinement failed. Please try again."}
               </div>
-              <button onClick={cancelRefine}
-                style={{ background: "transparent", color: CLR.textSecondary, border: `1px solid ${CLR.borderDefault}`, borderRadius: RAD.md, padding: "8px 0", cursor: "pointer", fontSize: TXT.sm, fontFamily: FONT.sans }}>
+              <Button variant="secondary" size="sm" onClick={cancelRefine} style={{ width: "100%" }}>
                 ← Try again
-              </button>
+              </Button>
             </>
           )}
         </div>
