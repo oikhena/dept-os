@@ -22,6 +22,7 @@ function formatCost(k: number): string {
 }
 
 export function CostByTaskChart({ knowledgeWork }: Props) {
+  const hasCitations = knowledgeWork.some(kw => kw.salarySource);
   if (!knowledgeWork.length) return null;
 
   // Parse costs and separate into costed vs uncosted
@@ -63,7 +64,7 @@ export function CostByTaskChart({ knowledgeWork }: Props) {
   ];
 
   const rowHeight = 36;
-  const svgHeight = allRows.length * rowHeight + 10;
+  const svgHeight = allRows.length * rowHeight + 10 + (hasCitations ? 14 : 0);
   const barStartX = 100;
   const barMaxWidth = 145;
   const valueX = 293;
@@ -94,6 +95,11 @@ export function CostByTaskChart({ knowledgeWork }: Props) {
         width="100%"
         style={{ display: "block" }}
       >
+        {hasCitations && (
+          <text x={2} y={svgHeight - 2} fontSize={7} fill={T.textMuted} fontFamily={FONT.mono}>
+            Source: BLS OEWS 2024
+          </text>
+        )}
         {allRows.map((row, i) => {
           const y = i * rowHeight + 18;
           const barWidth = row.hasCost

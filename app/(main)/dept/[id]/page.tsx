@@ -213,6 +213,11 @@ export default function DeptPage() {
             {isSaved && savedEntry?.kind === "generated" && (
               <Badge label="AI-generated" color={CLR.success} icon="✦" />
             )}
+            {dept._citations && dept._citations.length > 0 ? (
+              <Badge label="Data-grounded" color="#22c55e" icon="◉" />
+            ) : (
+              <Badge label="AI-estimated" color={GRAY[400]} icon="◎" />
+            )}
           </div>
         </div>
         <div style={{ display: "flex", gap: 8, flexShrink: 0, alignItems: "center" }}>
@@ -382,7 +387,7 @@ export default function DeptPage() {
                             const vfc = VALUE_FLOW_COLORS[wf.valueFlow];
                             return (
                               <div key={wf.id} style={{ borderLeft: `2px solid ${vfc}`, paddingLeft: 10, marginBottom: 8 }}>
-                                <div style={{ fontSize: TXT.md, color: CLR.textPrimary, fontFamily: FONT.sans }}>{wf.label}</div>
+                                <div style={{ fontSize: TXT.md, color: T.textPrimary, fontFamily: FONT.sans }}>{wf.label}</div>
                                 <div style={{ fontSize: TXT.sm, color: GRAY[500], fontFamily: FONT.sans }}>{isFrom ? "→" : "←"} {other?.label}</div>
                               </div>
                             );
@@ -394,7 +399,7 @@ export default function DeptPage() {
                           <div style={{ fontSize: TXT.xs, color: CLR.purple, letterSpacing: LS.wide, marginBottom: SP.sm, fontFamily: FONT.sans, fontWeight: 600 }}>SENSORS</div>
                           {roleSensors.map(s => (
                             <div key={s.id} style={{ borderLeft: `2px solid ${SENSE_COLORS[s.sense]}`, paddingLeft: 10, marginBottom: 8 }}>
-                              <div style={{ fontSize: TXT.md, color: CLR.textPrimary, fontFamily: FONT.sans }}>{s.label}</div>
+                              <div style={{ fontSize: TXT.md, color: T.textPrimary, fontFamily: FONT.sans }}>{s.label}</div>
                               <div style={{ fontSize: TXT.sm, color: GRAY[500], fontFamily: FONT.sans }}>{s.sense}</div>
                             </div>
                           ))}
@@ -405,7 +410,7 @@ export default function DeptPage() {
                           <div style={{ fontSize: TXT.xs, color: CLR.success, letterSpacing: LS.wide, marginBottom: SP.sm, fontFamily: FONT.sans, fontWeight: 600 }}>TASKS</div>
                           {roleKnowledge.map(k => (
                             <div key={k.id} style={{ borderLeft: `2px solid ${k.aiImpact === "supercharge" ? CLR.success : CLR.warning}`, paddingLeft: 10, marginBottom: 8 }}>
-                              <div style={{ fontSize: TXT.md, color: CLR.textPrimary, fontFamily: FONT.sans }}>{k.label}</div>
+                              <div style={{ fontSize: TXT.md, color: T.textPrimary, fontFamily: FONT.sans }}>{k.label}</div>
                               <Badge label={k.aiImpact === "supercharge" ? "supercharge" : "shortcircuit"}
                                 color={k.aiImpact === "supercharge" ? CLR.success : CLR.warning}
                                 icon={k.aiImpact === "supercharge" ? "⚡" : "🔁"} />
@@ -570,6 +575,40 @@ export default function DeptPage() {
                     )}
                   </div>
                 </div>
+
+                {/* ── Data Sources ── */}
+                {dept._citations && dept._citations.length > 0 && (
+                  <div style={{
+                    marginTop: SP.xl,
+                    border: `1px solid ${T.borderDefault}`,
+                    borderRadius: RAD.lg,
+                    padding: `${SP.md}px ${SP.lg}px`,
+                    background: T.bgSecondary,
+                  }}>
+                    <div style={{
+                      fontSize: TXT.xs, fontFamily: FONT.mono, fontWeight: 600,
+                      color: T.textMuted, letterSpacing: LS.wide,
+                      textTransform: "uppercase", marginBottom: SP.sm,
+                    }}>
+                      Data Sources
+                    </div>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: `${SP.xs}px ${SP.lg}px` }}>
+                      {dept._citations.map(c => (
+                        <div key={c.id} style={{ fontSize: TXT.sm, color: T.textSecondary, fontFamily: FONT.sans }}>
+                          <span style={{ color: T.textMuted, fontFamily: FONT.mono, fontSize: TXT.xs }}>[{c.id}]</span>{" "}
+                          {c.url ? (
+                            <a href={c.url} target="_blank" rel="noopener noreferrer"
+                              style={{ color: CLR.info, textDecoration: "none" }}
+                              onMouseEnter={e => (e.currentTarget.style.textDecoration = "underline")}
+                              onMouseLeave={e => (e.currentTarget.style.textDecoration = "none")}>
+                              {c.label}
+                            </a>
+                          ) : c.label}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 

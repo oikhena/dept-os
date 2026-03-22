@@ -82,7 +82,7 @@ export default function DepartmentBuilder({ dept, setDept, onDone }: DepartmentB
                 </div>
                 <span style={{
                   fontSize: TXT.sm, fontWeight: isActive ? 600 : 400,
-                  color: isActive ? accentColor : isPast ? CLR.textPrimary : GRAY[400],
+                  color: isActive ? accentColor : isPast ? T.textPrimary : GRAY[400],
                 }}>
                   {stepLabels[i]}
                 </span>
@@ -320,7 +320,7 @@ export default function DepartmentBuilder({ dept, setDept, onDone }: DepartmentB
                   const r = dept.roles.find(x => x.id === k.role);
                   return (
                     <div key={k.id} style={{
-                      background: GRAY[50],
+                      background: T.bgSecondary,
                       border: `1px solid ${k.aiImpact === "supercharge" ? CLR.success + "30" : CLR.warning + "30"}`,
                       borderLeft: `3px solid ${k.aiImpact === "supercharge" ? CLR.success : CLR.warning}`,
                       borderRadius: RAD.md, padding: `${SP.sm}px ${SP.md}px`,
@@ -365,7 +365,7 @@ export default function DepartmentBuilder({ dept, setDept, onDone }: DepartmentB
                 { l: "⚡ Supercharge", v: dept.knowledgeWork.filter(k => k.aiImpact === "supercharge").length, c: CLR.warning },
               ].map(s => (
                 <div key={s.l} style={{
-                  background: GRAY[50], border: `1px solid ${s.c}20`,
+                  background: T.bgSecondary, border: `1px solid ${s.c}20`,
                   borderRadius: RAD.lg, padding: SP.lg, textAlign: "center",
                 }}>
                   <div style={{ fontSize: TXT.xl, fontWeight: 700, color: s.c }}>{s.v}</div>
@@ -374,7 +374,7 @@ export default function DepartmentBuilder({ dept, setDept, onDone }: DepartmentB
               ))}
             </div>
             <div style={{
-              background: GRAY[50], border: `1px solid ${accentColor}20`,
+              background: T.bgSecondary, border: `1px solid ${accentColor}20`,
               borderRadius: RAD.lg, padding: SP.xl, marginBottom: SP.xl,
               fontSize: TXT.md, color: GRAY[500], lineHeight: LH.relaxed,
             }}>

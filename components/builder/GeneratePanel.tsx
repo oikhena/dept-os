@@ -40,7 +40,7 @@ export default function GeneratePanel({ onGenerated }: GeneratePanelProps) {
     abortRef.current = new AbortController();
     let acc = "";
     try {
-      await generateDepartment(query, placeDetails, chunk => {
+      const result = await generateDepartment(query, placeDetails, chunk => {
         acc += chunk; setRawStream(acc);
         const p = tryParse(acc);
         if (p?.label) setPartial(p);
@@ -49,6 +49,10 @@ export default function GeneratePanel({ onGenerated }: GeneratePanelProps) {
       if (final?.label) {
         if (placeDetails && final) {
           final.coordinates = { lat: placeDetails.lat, lng: placeDetails.lng };
+        }
+        // Merge server-side citations if the model didn't include them
+        if (result.citations.length > 0 && !final._citations?.length) {
+          final._citations = result.citations;
         }
         clearInterval(timerRef.current!);
         onGenerated(final, query);
@@ -200,7 +204,7 @@ export default function GeneratePanel({ onGenerated }: GeneratePanelProps) {
                 </div>
                 <div style={{ display: "flex", gap: SP.md, flexWrap: "wrap" }}>
                   {[
-                    { label: "Roles", count: partial.roles?.length || 0, color: CLR.textPrimary },
+                    { label: "Roles", count: partial.roles?.length || 0, color: T.textPrimary },
                     { label: "Flows", count: partial.workflows?.length || 0, color: CLR.info },
                     { label: "Sensors", count: partial.sensors?.length || 0, color: CLR.purple },
                     { label: "Agents", count: partial.agents?.length || 0, color: CLR.warning },
