@@ -1,0 +1,3141 @@
+{
+  "_meta": {
+    "source": "O*NET + Analysis",
+    "version": "2024 (demo)"
+  },
+  "data": {
+    "11-1011": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Identifying Objects, Actions, and Events",
+        "Organizing, Planning, and Prioritizing Work",
+        "Evaluating Information to Determine Compliance with Standards"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Coaching and Developing Others",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "11-1021": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Organizing, Planning, and Prioritizing Work",
+        "Interacting With Computers",
+        "Monitor Processes, Materials, or Surroundings"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Electronic Equipment",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Coaching and Developing Others"
+      ]
+    },
+    "11-1031": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Organizing, Planning, and Prioritizing Work",
+        "Identifying Objects, Actions, and Events",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "11-2021": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Organizing, Planning, and Prioritizing Work",
+        "Documenting/Recording Information",
+        "Evaluating Information to Determine Compliance with Standards"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment",
+        "Training and Teaching Others"
+      ]
+    },
+    "11-2022": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Organizing, Planning, and Prioritizing Work"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "11-3011": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Organizing, Planning, and Prioritizing Work",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment",
+        "Training and Teaching Others"
+      ]
+    },
+    "11-3013": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Organizing, Planning, and Prioritizing Work",
+        "Analyzing Data or Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "11-3021": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Organizing, Planning, and Prioritizing Work",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Performing General Physical Activities",
+        "Handling and Moving Objects",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "11-3031": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Evaluating Information to Determine Compliance with Standards"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing for or Working Directly with the Public",
+        "Handling and Moving Objects"
+      ]
+    },
+    "11-3051": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Identifying Objects, Actions, and Events",
+        "Organizing, Planning, and Prioritizing Work"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "11-3061": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Evaluating Information to Determine Compliance with Standards"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities",
+        "Handling and Moving Objects"
+      ]
+    },
+    "11-3071": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Organizing, Planning, and Prioritizing Work"
+      ],
+      "topHumanTasks": [
+        "Controlling Machines and Processes",
+        "Handling and Moving Objects",
+        "Staffing Organizational Units"
+      ]
+    },
+    "11-3111": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Organizing, Planning, and Prioritizing Work",
+        "Updating and Using Relevant Knowledge",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Performing General Physical Activities",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "11-3121": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Organizing, Planning, and Prioritizing Work",
+        "Scheduling Work and Activities"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "11-3131": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Organizing, Planning, and Prioritizing Work",
+        "Documenting/Recording Information",
+        "Analyzing Data or Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "11-9013": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Organizing, Planning, and Prioritizing Work",
+        "Documenting/Recording Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "11-9021": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Organizing, Planning, and Prioritizing Work",
+        "Processing Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Handling and Moving Objects",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "11-9032": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Processing Information",
+        "Organizing, Planning, and Prioritizing Work"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "11-9033": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Getting Information",
+        "Organizing, Planning, and Prioritizing Work"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Electronic Equipment",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "11-9041": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Identifying Objects, Actions, and Events",
+        "Processing Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Controlling Machines and Processes",
+        "Coaching and Developing Others"
+      ]
+    },
+    "11-9111": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Organizing, Planning, and Prioritizing Work",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "11-9151": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Updating and Using Relevant Knowledge",
+        "Organizing, Planning, and Prioritizing Work",
+        "Analyzing Data or Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "11-9161": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Evaluating Information to Determine Compliance with Standards",
+        "Organizing, Planning, and Prioritizing Work",
+        "Analyzing Data or Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "11-9179": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Organizing, Planning, and Prioritizing Work",
+        "Scheduling Work and Activities"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "11-9198": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Organizing, Planning, and Prioritizing Work",
+        "Analyzing Data or Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Handling and Moving Objects",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "11-9199": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Organizing, Planning, and Prioritizing Work",
+        "Processing Information",
+        "Scheduling Work and Activities"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "13-1041": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "13-1071": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "13-1075": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "13-1082": {
+      "automationPotential": 0.51,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Performing General Physical Activities",
+        "Repairing and Maintaining Electronic Equipment",
+        "Establishing and Maintaining Interpersonal Relationships"
+      ]
+    },
+    "13-1111": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Evaluating Information to Determine Compliance with Standards"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "13-1121": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "13-1151": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Controlling Machines and Processes",
+        "Coaching and Developing Others",
+        "Resolving Conflicts and Negotiating with Others"
+      ]
+    },
+    "13-1161": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Performing for or Working Directly with the Public",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "13-2011": {
+      "automationPotential": 0.51,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "13-2031": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Performing General Physical Activities",
+        "Handling and Moving Objects"
+      ]
+    },
+    "13-2041": {
+      "automationPotential": 0.51,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Handling and Moving Objects",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "13-2051": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Handling and Moving Objects",
+        "Controlling Machines and Processes",
+        "Coordinating the Work and Activities of Others"
+      ]
+    },
+    "13-2061": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "15-1211": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Handling and Moving Objects",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "15-1212": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Handling and Moving Objects"
+      ]
+    },
+    "15-1221": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "15-1232": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "15-1241": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "15-1242": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Electronic Equipment",
+        "Controlling Machines and Processes",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "15-1243": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "15-1244": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "15-1251": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Performing for or Working Directly with the Public",
+        "Handling and Moving Objects",
+        "Coaching and Developing Others"
+      ]
+    },
+    "15-1252": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "15-1253": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "15-1255": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "15-1299": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "15-2011": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "15-2021": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Operating Vehicles, Mechanized Devices, or Equipment"
+      ]
+    },
+    "15-2031": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "15-2041": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Handling and Moving Objects",
+        "Performing General Physical Activities",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "15-2051": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Handling and Moving Objects"
+      ]
+    },
+    "17-1011": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Performing General Physical Activities",
+        "Controlling Machines and Processes",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "17-1022": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "17-2011": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Evaluating Information to Determine Compliance with Standards"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "17-2041": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Operating Vehicles, Mechanized Devices, or Equipment"
+      ]
+    },
+    "17-2051": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Resolving Conflicts and Negotiating with Others",
+        "Selling or Influencing Others"
+      ]
+    },
+    "17-2071": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Evaluating Information to Determine Compliance with Standards"
+      ],
+      "topHumanTasks": [
+        "Performing General Physical Activities",
+        "Performing for or Working Directly with the Public",
+        "Staffing Organizational Units"
+      ]
+    },
+    "17-2081": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Getting Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Electronic Equipment",
+        "Handling and Moving Objects",
+        "Guiding, Directing, and Motivating Subordinates"
+      ]
+    },
+    "17-2112": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Guiding, Directing, and Motivating Subordinates",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "17-2141": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Getting Information",
+        "Processing Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Operating Vehicles, Mechanized Devices, or Equipment"
+      ]
+    },
+    "17-2199": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "17-3011": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Analyzing Data or Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "17-3023": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Evaluating Information to Determine Compliance with Standards"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "17-3026": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Guiding, Directing, and Motivating Subordinates",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "19-1013": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Handling and Moving Objects",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "19-1023": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects",
+        "Coaching and Developing Others"
+      ]
+    },
+    "19-1031": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "19-1042": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "19-2031": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Staffing Organizational Units"
+      ]
+    },
+    "19-2041": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "19-3011": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing for or Working Directly with the Public",
+        "Performing General Physical Activities"
+      ]
+    },
+    "19-3032": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Electronic Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "19-3034": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Documenting/Recording Information",
+        "Processing Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "19-3051": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "19-4042": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "19-4071": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "21-1011": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Documenting/Recording Information",
+        "Evaluating Information to Determine Compliance with Standards"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "21-1012": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Getting Information",
+        "Processing Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Guiding, Directing, and Motivating Subordinates"
+      ]
+    },
+    "21-1013": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Analyzing Data or Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities"
+      ]
+    },
+    "21-1014": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Getting Information",
+        "Analyzing Data or Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Electronic Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "21-1015": {
+      "automationPotential": 0.45,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Getting Information",
+        "Identifying Objects, Actions, and Events"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities"
+      ]
+    },
+    "21-1021": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Getting Information",
+        "Evaluating Information to Determine Compliance with Standards"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "21-1022": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Documenting/Recording Information",
+        "Analyzing Data or Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "21-1023": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Documenting/Recording Information",
+        "Processing Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Guiding, Directing, and Motivating Subordinates"
+      ]
+    },
+    "21-1029": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Assisting and Caring for Others",
+        "Handling and Moving Objects"
+      ]
+    },
+    "21-1091": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Documenting/Recording Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "21-1092": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Getting Information",
+        "Processing Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Handling and Moving Objects",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "21-1093": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "23-1011": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "23-1012": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "23-1021": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects",
+        "Coaching and Developing Others"
+      ]
+    },
+    "23-1023": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Evaluating Information to Determine Compliance with Standards"
+      ],
+      "topHumanTasks": [
+        "Performing General Physical Activities",
+        "Controlling Machines and Processes",
+        "Handling and Moving Objects"
+      ]
+    },
+    "23-2011": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Handling and Moving Objects",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "23-2093": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "25-1011": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Updating and Using Relevant Knowledge",
+        "Getting Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "25-1021": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Getting Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Handling and Moving Objects",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "25-1032": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Updating and Using Relevant Knowledge",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "25-1042": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Documenting/Recording Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Performing General Physical Activities",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "25-1052": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Processing Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "25-1071": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Analyzing Data or Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "25-1082": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Updating and Using Relevant Knowledge",
+        "Getting Information",
+        "Organizing, Planning, and Prioritizing Work"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Repairing and Maintaining Electronic Equipment",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "25-2011": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Updating and Using Relevant Knowledge",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "25-2012": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Updating and Using Relevant Knowledge",
+        "Analyzing Data or Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "25-2021": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Updating and Using Relevant Knowledge",
+        "Getting Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "25-2022": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Updating and Using Relevant Knowledge",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Coaching and Developing Others"
+      ]
+    },
+    "25-2031": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Updating and Using Relevant Knowledge",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Performing General Physical Activities",
+        "Handling and Moving Objects",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "25-2052": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Updating and Using Relevant Knowledge",
+        "Getting Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "25-2057": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Updating and Using Relevant Knowledge",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Performing for or Working Directly with the Public",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "25-2058": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Updating and Using Relevant Knowledge",
+        "Getting Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Handling and Moving Objects",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "25-2059": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Updating and Using Relevant Knowledge",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "25-3011": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Updating and Using Relevant Knowledge",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "25-3021": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Updating and Using Relevant Knowledge",
+        "Evaluating Information to Determine Compliance with Standards"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Resolving Conflicts and Negotiating with Others"
+      ]
+    },
+    "25-3031": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Updating and Using Relevant Knowledge",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "25-4011": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Updating and Using Relevant Knowledge",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Repairing and Maintaining Electronic Equipment",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "25-4022": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Documenting/Recording Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "25-9031": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Updating and Using Relevant Knowledge",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "25-9044": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Updating and Using Relevant Knowledge",
+        "Getting Information",
+        "Organizing, Planning, and Prioritizing Work"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Repairing and Maintaining Electronic Equipment",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "25-9045": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Updating and Using Relevant Knowledge",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Electronic Equipment",
+        "Performing General Physical Activities",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "29-1011": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Getting Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "29-1021": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Guiding, Directing, and Motivating Subordinates"
+      ]
+    },
+    "29-1031": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Processing Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "29-1041": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Processing Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "29-1051": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Processing Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Handling and Moving Objects",
+        "Performing General Physical Activities"
+      ]
+    },
+    "29-1071": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Getting Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "29-1122": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Getting Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Operating Vehicles, Mechanized Devices, or Equipment"
+      ]
+    },
+    "29-1123": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Getting Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "29-1126": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Documenting/Recording Information",
+        "Processing Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "29-1127": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Getting Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "29-1131": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Processing Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "29-1141": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "29-1151": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Processing Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Performing General Physical Activities",
+        "Assisting and Caring for Others",
+        "Coaching and Developing Others"
+      ]
+    },
+    "29-1161": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Processing Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Handling and Moving Objects"
+      ]
+    },
+    "29-1171": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Updating and Using Relevant Knowledge",
+        "Processing Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "29-1211": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Processing Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Controlling Machines and Processes",
+        "Performing General Physical Activities"
+      ]
+    },
+    "29-1215": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Updating and Using Relevant Knowledge",
+        "Getting Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Performing General Physical Activities",
+        "Assisting and Caring for Others",
+        "Handling and Moving Objects"
+      ]
+    },
+    "29-1216": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "29-1218": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Documenting/Recording Information",
+        "Processing Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "29-1221": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "29-1223": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Updating and Using Relevant Knowledge",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Electronic Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "29-1228": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Updating and Using Relevant Knowledge",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Assisting and Caring for Others",
+        "Handling and Moving Objects"
+      ]
+    },
+    "29-1229": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Getting Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "29-1241": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Processing Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "29-1248": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Getting Information",
+        "Analyzing Data or Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Handling and Moving Objects",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "29-1292": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities"
+      ]
+    },
+    "29-2010": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "29-2032": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Documenting/Recording Information",
+        "Processing Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "29-2034": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "29-2041": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Processing Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "29-2042": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Processing Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "29-2052": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Processing Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "29-2061": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Processing Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Handling and Moving Objects"
+      ]
+    },
+    "31-1120": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Documenting/Recording Information",
+        "Scheduling Work and Activities"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "31-1131": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "31-2011": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "31-2021": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Getting Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Electronic Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "31-9091": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Processing Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "31-9092": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Getting Information",
+        "Scheduling Work and Activities"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "31-9097": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Getting Information",
+        "Processing Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "33-1011": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Identifying Objects, Actions, and Events",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "33-1012": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Documenting/Recording Information",
+        "Identifying Objects, Actions, and Events"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "33-1021": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Getting Information",
+        "Identifying Objects, Actions, and Events"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "33-2011": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Analyzing Data or Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "33-2021": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Getting Information",
+        "Processing Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "33-3011": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Documenting/Recording Information",
+        "Identifying Objects, Actions, and Events"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "33-3012": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Getting Information",
+        "Identifying Objects, Actions, and Events"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "33-3021": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Processing Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "33-3051": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Getting Information",
+        "Identifying Objects, Actions, and Events"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "33-3052": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Getting Information",
+        "Identifying Objects, Actions, and Events"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "33-9011": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Getting Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "33-9032": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Getting Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Controlling Machines and Processes",
+        "Performing General Physical Activities"
+      ]
+    },
+    "33-9091": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Identifying Objects, Actions, and Events",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "35-1012": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Updating and Using Relevant Knowledge",
+        "Identifying Objects, Actions, and Events",
+        "Analyzing Data or Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Electronic Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "35-2014": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Monitor Processes, Materials, or Surroundings",
+        "Getting Information",
+        "Organizing, Planning, and Prioritizing Work"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Controlling Machines and Processes",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "35-2021": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Monitor Processes, Materials, or Surroundings",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Guiding, Directing, and Motivating Subordinates"
+      ]
+    },
+    "37-1011": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Evaluating Information to Determine Compliance with Standards",
+        "Processing Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects",
+        "Performing General Physical Activities"
+      ]
+    },
+    "37-1012": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Identifying Objects, Actions, and Events",
+        "Estimating the Quantifiable Characteristics of Products, Events, or Information",
+        "Processing Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "37-2011": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Getting Information",
+        "Estimating the Quantifiable Characteristics of Products, Events, or Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "37-3011": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Getting Information",
+        "Estimating the Quantifiable Characteristics of Products, Events, or Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "37-3013": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Estimating the Quantifiable Characteristics of Products, Events, or Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "43-1011": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "43-3011": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "43-3021": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Training and Teaching Others",
+        "Coaching and Developing Others",
+        "Staffing Organizational Units"
+      ]
+    },
+    "43-3031": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "43-3051": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Performing General Physical Activities",
+        "Handling and Moving Objects",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "43-3061": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Analyzing Data or Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "43-4031": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Getting Information",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "43-4051": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Performing General Physical Activities",
+        "Handling and Moving Objects",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "43-4061": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Handling and Moving Objects"
+      ]
+    },
+    "43-4071": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "43-4081": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Handling and Moving Objects",
+        "Staffing Organizational Units"
+      ]
+    },
+    "43-4111": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Getting Information",
+        "Processing Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "43-4121": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Performing for or Working Directly with the Public",
+        "Guiding, Directing, and Motivating Subordinates"
+      ]
+    },
+    "43-4161": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities",
+        "Handling and Moving Objects"
+      ]
+    },
+    "43-4171": {
+      "automationPotential": 0.5,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Handling and Moving Objects",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "43-5011": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "43-5021": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "43-5031": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing for or Working Directly with the Public",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "43-5032": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "43-5061": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "43-6011": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Processing Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Performing General Physical Activities",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "43-6012": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "43-6013": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "43-6014": {
+      "automationPotential": 0.49,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Performing General Physical Activities",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "43-9061": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Handling and Moving Objects",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "47-1011": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Getting Information",
+        "Evaluating Information to Determine Compliance with Standards"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "47-2031": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Identifying Objects, Actions, and Events",
+        "Analyzing Data or Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Controlling Machines and Processes",
+        "Performing General Physical Activities"
+      ]
+    },
+    "47-2061": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Processing Information",
+        "Monitor Processes, Materials, or Surroundings"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "47-2073": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Getting Information",
+        "Monitor Processes, Materials, or Surroundings"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "47-2111": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Updating and Using Relevant Knowledge",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "47-2152": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Analyzing Data or Information",
+        "Processing Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment",
+        "Guiding, Directing, and Motivating Subordinates"
+      ]
+    },
+    "47-4011": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Identifying Objects, Actions, and Events",
+        "Analyzing Data or Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment",
+        "Training and Teaching Others"
+      ]
+    },
+    "49-1011": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Getting Information",
+        "Monitor Processes, Materials, or Surroundings"
+      ],
+      "topHumanTasks": [
+        "Performing General Physical Activities",
+        "Repairing and Maintaining Electronic Equipment",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "49-3023": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Identifying Objects, Actions, and Events",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Electronic Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "49-3042": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Getting Information",
+        "Monitor Processes, Materials, or Surroundings"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities",
+        "Handling and Moving Objects"
+      ]
+    },
+    "49-9021": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Scheduling Work and Activities",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Electronic Equipment",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "49-9041": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Identifying Objects, Actions, and Events"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Handling and Moving Objects"
+      ]
+    },
+    "49-9042": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Getting Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "49-9051": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Getting Information",
+        "Estimating the Quantifiable Characteristics of Products, Events, or Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Performing General Physical Activities",
+        "Controlling Machines and Processes"
+      ]
+    },
+    "49-9052": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Getting Information",
+        "Organizing, Planning, and Prioritizing Work",
+        "Documenting/Recording Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "49-9071": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Getting Information",
+        "Evaluating Information to Determine Compliance with Standards"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "53-1041": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "53-1042": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Processing Information",
+        "Evaluating Information to Determine Compliance with Standards"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities"
+      ]
+    },
+    "53-2011": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Evaluating Information to Determine Compliance with Standards",
+        "Identifying Objects, Actions, and Events",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "53-3032": {
+      "automationPotential": 0.48,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Monitor Processes, Materials, or Surroundings"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "53-3033": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Identifying Objects, Actions, and Events",
+        "Monitor Processes, Materials, or Surroundings",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Repairing and Maintaining Electronic Equipment"
+      ]
+    },
+    "53-3051": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Getting Information",
+        "Identifying Objects, Actions, and Events"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Operating Vehicles, Mechanized Devices, or Equipment"
+      ]
+    },
+    "53-3052": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Monitor Processes, Materials, or Surroundings",
+        "Identifying Objects, Actions, and Events",
+        "Evaluating Information to Determine Compliance with Standards"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Electronic Equipment",
+        "Operating Vehicles, Mechanized Devices, or Equipment"
+      ]
+    },
+    "53-3054": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Monitor Processes, Materials, or Surroundings",
+        "Identifying Objects, Actions, and Events",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Handling and Moving Objects"
+      ]
+    },
+    "53-4011": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Monitor Processes, Materials, or Surroundings",
+        "Getting Information",
+        "Updating and Using Relevant Knowledge"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing General Physical Activities",
+        "Handling and Moving Objects"
+      ]
+    },
+    "53-4031": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Documenting/Recording Information",
+        "Getting Information"
+      ],
+      "topHumanTasks": [
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Controlling Machines and Processes",
+        "Repairing and Maintaining Mechanical Equipment"
+      ]
+    },
+    "53-5021": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Monitor Processes, Materials, or Surroundings",
+        "Scheduling Work and Activities",
+        "Identifying Objects, Actions, and Events"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Mechanical Equipment",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "53-6021": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Documenting/Recording Information",
+        "Updating and Using Relevant Knowledge",
+        "Monitor Processes, Materials, or Surroundings"
+      ],
+      "topHumanTasks": [
+        "Performing General Physical Activities",
+        "Operating Vehicles, Mechanized Devices, or Equipment",
+        "Performing for or Working Directly with the Public"
+      ]
+    },
+    "53-7021": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Processing Information",
+        "Analyzing Data or Information",
+        "Monitor Processes, Materials, or Surroundings"
+      ],
+      "topHumanTasks": [
+        "Repairing and Maintaining Electronic Equipment",
+        "Performing for or Working Directly with the Public",
+        "Handling and Moving Objects"
+      ]
+    },
+    "53-7051": {
+      "automationPotential": 0.46,
+      "topAutomatableTasks": [
+        "Updating and Using Relevant Knowledge",
+        "Identifying Objects, Actions, and Events",
+        "Monitor Processes, Materials, or Surroundings"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Mechanical Equipment",
+        "Operating Vehicles, Mechanized Devices, or Equipment"
+      ]
+    },
+    "53-7062": {
+      "automationPotential": 0.47,
+      "topAutomatableTasks": [
+        "Analyzing Data or Information",
+        "Evaluating Information to Determine Compliance with Standards",
+        "Monitor Processes, Materials, or Surroundings"
+      ],
+      "topHumanTasks": [
+        "Assisting and Caring for Others",
+        "Repairing and Maintaining Electronic Equipment",
+        "Performing for or Working Directly with the Public"
+      ]
+    }
+  }
+}

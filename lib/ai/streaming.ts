@@ -1,5 +1,5 @@
 import { API_URL, SYSTEM_PROMPT } from "./prompts";
-import type { Department } from "../../types/department";
+import type { Citation, Department } from "../../types/department";
 import type { PlaceDetails } from "../maps/loader";
 
 function buildPlaceContext(place: PlaceDetails): string {
@@ -10,13 +10,18 @@ Coordinates: ${place.lat.toFixed(4)}, ${place.lng.toFixed(4)}
 Facility type: ${place.types.slice(0, 4).join(", ")}`;
 }
 
+export interface GenerationResult {
+  citations: Citation[];
+}
+
 export async function generateDepartment(
   query: string,
   place: PlaceDetails | null,
   onChunk: (chunk: string) => void,
   signal: AbortSignal
-): Promise<void> {
+): Promise<GenerationResult> {
   const placeContext = place ? buildPlaceContext(place) : "";
+  const placeDetails = place ? { lat: place.lat, lng: place.lng, name: place.name, types: place.types } : null;
   const response = await fetch(API_URL, {
     method: "POST",
     signal,
@@ -26,6 +31,8 @@ export async function generateDepartment(
       max_tokens: 4000,
       stream: true,
       system: SYSTEM_PROMPT,
+      enrichWithData: true,
+      placeDetails,
       messages: [{
         role: "user",
         content: `Research and generate the complete department schema for: "${query}"${placeContext}\n\nBe thorough. Ground every claim in real operational knowledge of this institution type. Weight agent recommendations based on the region's infrastructure constraints.`
@@ -36,6 +43,7 @@ export async function generateDepartment(
   const reader = response.body!.getReader();
   const decoder = new TextDecoder();
   let buffer = "";
+  let citations: Citation[] = [];
   while (true) {
     const { done, value } = await reader.read();
     if (done) break;
@@ -45,13 +53,15 @@ export async function generateDepartment(
     for (const line of lines) {
       if (!line.startsWith("data: ")) continue;
       const data = line.slice(6).trim();
-      if (data === "[DONE]") return;
+      if (data === "[DONE]") return { citations };
       try {
         const evt = JSON.parse(data);
         if (evt.type === "content_block_delta" && evt.delta?.text) onChunk(evt.delta.text);
+        if (evt.type === "citations" && evt.citations) citations = evt.citations;
       } catch {}
     }
   }
+  return { citations };
 }
 
 export function tryParse(raw: string): Department | null {

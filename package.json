@@ -5,7 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "data:update": "npx tsx scripts/fetch-datasets.ts",
+    "data:update:bls": "npx tsx scripts/fetch-bls-oews.ts --demo",
+    "data:update:onet": "npx tsx scripts/fetch-onet.ts --demo",
+    "data:update:world-bank": "npx tsx scripts/fetch-world-bank.ts",
+    "data:update:who": "npx tsx scripts/fetch-who.ts"
   },
   "keywords": [],
   "author": "",

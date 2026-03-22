@@ -1,0 +1,56 @@
+{
+  "_meta": {
+    "source": "AHRQ HCUP / CMS",
+    "version": "2024",
+    "note": "Curated from published statistics. Costs are in USD. All figures based on publicly available research from federal agencies and peer-reviewed publications."
+  },
+  "data": {
+    "healthcare": [
+      { "event": "Medication error", "medianCost": 4700, "annualIncidence": "1.5M nationally", "source": "AHRQ PSI 2023" },
+      { "event": "Hospital-acquired infection", "medianCost": 28400, "annualIncidence": "687K nationally", "source": "CDC HAI 2022" },
+      { "event": "Patient fall with injury", "medianCost": 14100, "annualIncidence": "700K-1M nationally", "source": "AHRQ PSI 2023" },
+      { "event": "Pressure ulcer (Stage III/IV)", "medianCost": 21400, "annualIncidence": "2.5M nationally", "source": "AHRQ HCUP 2022" },
+      { "event": "Surgical site infection", "medianCost": 34200, "annualIncidence": "157K nationally", "source": "CDC SSI 2022" },
+      { "event": "Wrong-site surgery", "medianCost": 62000, "annualIncidence": "40 per week nationally", "source": "Joint Commission 2023" },
+      { "event": "Venous thromboembolism (preventable)", "medianCost": 18300, "annualIncidence": "547K nationally", "source": "CDC VTE 2022" },
+      { "event": "30-day unplanned readmission", "medianCost": 15200, "annualIncidence": "3.8M nationally", "source": "CMS HRRP 2023" }
+    ],
+    "education": [
+      { "event": "Student dropout (high school)", "lifetimeCost": 272000, "annualIncidence": "1.2M nationally", "source": "NCES 2023" },
+      { "event": "Chronic absenteeism intervention", "medianCost": 2800, "annualIncidence": "7.5M students nationally", "source": "ED Office of Civil Rights 2022" },
+      { "event": "Student disciplinary incident (suspension)", "medianCost": 4500, "annualIncidence": "2.5M nationally", "source": "NCES Discipline 2023" },
+      { "event": "Special education misidentification", "medianCost": 18000, "annualIncidence": "Unknown", "source": "IDEA Data Center 2022" },
+      { "event": "Teacher turnover (replacement cost)", "medianCost": 21000, "annualIncidence": "270K nationally", "source": "Learning Policy Institute 2022" },
+      { "event": "School safety incident (major)", "medianCost": 125000, "annualIncidence": "Unknown", "source": "NCES School Safety 2023" },
+      { "event": "Bullying-related mental health intervention", "medianCost": 3200, "annualIncidence": "13M students nationally", "source": "StopBullying.gov 2023" }
+    ],
+    "infrastructure": [
+      { "event": "Water main break", "medianCost": 350000, "annualIncidence": "240K nationally", "source": "ASCE 2021" },
+      { "event": "Power grid failure (per hour per MW)", "medianCost": 18000, "annualIncidence": "Varies", "source": "DOE Grid Resilience 2023" },
+      { "event": "Sewer overflow (sanitary)", "medianCost": 175000, "annualIncidence": "23K-75K nationally", "source": "EPA SSO 2022" },
+      { "event": "Bridge structural failure (repair)", "medianCost": 2400000, "annualIncidence": "Unknown", "source": "FHWA Bridge 2023" },
+      { "event": "Road surface failure (per lane mile)", "medianCost": 48000, "annualIncidence": "Varies", "source": "FHWA Highway Statistics 2022" },
+      { "event": "Gas leak emergency response", "medianCost": 85000, "annualIncidence": "Unknown", "source": "PHMSA 2023" },
+      { "event": "Dam safety incident", "medianCost": 4200000, "annualIncidence": "~100 nationally", "source": "ASDSO 2022" },
+      { "event": "Telecommunications outage (per hour)", "medianCost": 42000, "annualIncidence": "Varies", "source": "FCC Outage Reports 2023" }
+    ],
+    "public_safety": [
+      { "event": "Misrouted emergency call", "medianCost": 15000, "annualIncidence": "Unknown", "source": "NENA 2022" },
+      { "event": "False alarm response (fire)", "medianCost": 2300, "annualIncidence": "2.1M nationally", "source": "NFPA 2023" },
+      { "event": "Evidence handling error", "medianCost": 45000, "annualIncidence": "Unknown", "source": "NIJ 2022" },
+      { "event": "Wrongful arrest/detention", "medianCost": 52000, "annualIncidence": "Unknown", "source": "DOJ BJS 2023" },
+      { "event": "Officer injury (line of duty)", "medianCost": 73000, "annualIncidence": "58K nationally", "source": "FBI LEOKA 2022" },
+      { "event": "Vehicle pursuit property damage", "medianCost": 28000, "annualIncidence": "Unknown", "source": "IACP 2022" },
+      { "event": "Dispatch delay (cardiac arrest)", "medianCost": 125000, "annualIncidence": "356K nationally (all OHCA)", "source": "AHA 2023" }
+    ],
+    "government": [
+      { "event": "Benefits fraud (per case)", "medianCost": 8200, "annualIncidence": "Varies by program", "source": "GAO 2023" },
+      { "event": "Procurement error/protest", "medianCost": 95000, "annualIncidence": "2,600 protests annually", "source": "GAO Bid Protest 2023" },
+      { "event": "Data breach (per record, public sector)", "medianCost": 245, "annualIncidence": "Varies", "source": "IBM Cost of Data Breach 2023" },
+      { "event": "FOIA litigation (per case)", "medianCost": 35000, "annualIncidence": "800K requests nationally", "source": "DOJ FOIA 2023" },
+      { "event": "Permitting delay (per month)", "medianCost": 22000, "annualIncidence": "Varies", "source": "Brookings Regulatory 2022" },
+      { "event": "IT system downtime (per hour)", "medianCost": 68000, "annualIncidence": "Varies", "source": "GAO IT Modernization 2023" },
+      { "event": "Employee workplace injury (public sector)", "medianCost": 42000, "annualIncidence": "830K public sector nationally", "source": "BLS SOII 2022" }
+    ]
+  }
+}

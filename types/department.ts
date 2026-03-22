@@ -1,9 +1,18 @@
+export interface Citation {
+  id: string;
+  label: string;
+  url?: string;
+  accessed?: string;
+}
+
 export interface Role {
   id: string;
   label: string;
   x: number;
   y: number;
   icon: string;
+  socCode?: string;
+  medianSalary?: number;
 }
 
 export interface Workflow {
@@ -36,6 +45,9 @@ export interface KnowledgeWork {
   aiNote: string;
   costPerYear?: string;
   valueAtStake?: string;
+  salarySource?: string;
+  automationScore?: number;
+  automationSource?: string;
 }
 
 export interface Agent {
@@ -68,6 +80,8 @@ export interface Department {
   knowledgeWork: KnowledgeWork[];
   agents: Agent[];
   _isCustom?: boolean;
+  _citations?: Citation[];
+  _dataVersion?: string;
 }
 
 export interface Advisor {

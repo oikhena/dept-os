@@ -171,14 +171,23 @@ Schema:
 }
 
 Rules:
-- roles: 4-6 roles, spread across SVG canvas (x:10-90, y:15-85, no clustering)
+- roles: 4-6 roles, spread across SVG canvas (x:10-90, y:15-85, no clustering). Include "socCode" field if you can map to a BLS Standard Occupational Classification code.
 - workflows: 5-8 flows between roles
 - sensors: 4-7 sensory touchpoints
-- knowledgeWork: 6-10 tasks, highest-effort + highest-AI-leverage work
+- knowledgeWork: 6-10 tasks, highest-effort + highest-AI-leverage work. Include "salarySource" and "automationSource" citation IDs when using verified data.
 - agents: 4-7 agents, priority 1=build first
 - For African/Global South: weight mobile agents, note connectivity constraints, reference local context
 - Be specific: name real tools, studies, statistics
-- All role ids in workflows/sensors/knowledgeWork must exist in the roles array`;
+- All role ids in workflows/sensors/knowledgeWork must exist in the roles array
+- When VERIFIED EXTERNAL DATA is provided below, you MUST:
+  1. Use the exact salary figures from BLS data for costPerYear calculations (not invented numbers)
+  2. Reference AI automation scores when assessing aiImpact for each task
+  3. Use cost-of-failure data for valueAtStake fields
+  4. Include citation markers [bls-1], [ai-2] etc. in aiNote fields
+  5. For Global South institutions, reference the regional context data for infrastructure assessment
+  6. Add a "_citations" array to the root JSON with all citation objects used
+  7. If a role cannot be mapped to external data, estimate — but prefix estimates with "(est.)"
+- "_citations" schema: [{ "id": "bls-1", "label": "BLS OEWS May 2024", "url": "https://www.bls.gov/oes/" }]`;
 
 export function buildSystemPrompt(agent: Agent, dept: Department): string {
   const at = AGENT_TYPES[agent.type] || AGENT_TYPES.web;
